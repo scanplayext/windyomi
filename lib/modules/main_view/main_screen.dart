@@ -11,6 +11,7 @@ import 'package:mangayomi/models/chapter.dart';
 import 'package:mangayomi/models/manga.dart';
 import 'package:mangayomi/models/update.dart';
 import 'package:mangayomi/models/source.dart';
+import 'package:mangayomi/modules/more/about/providers/download_file_screen.dart';
 import 'package:mangayomi/modules/more/providers/downloaded_only_state_provider.dart';
 import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
 import 'package:mangayomi/modules/more/settings/sync/providers/sync_providers.dart';
@@ -118,7 +119,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   void _initializeProviders() {
     Future.microtask(() {
       if (mounted) {
-        ref.read(checkForUpdateProvider(context: context));
         for (var type in ItemType.values) {
           ref.read(
             fetchItemSourcesListProvider(
@@ -169,6 +169,17 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   bool isLibSwitch = false;
   @override
   Widget build(BuildContext context) {
+    ref.listen<AsyncValue<UpdateInfo?>>(checkForUpdateProvider, (_, next) {
+      next.whenData((updateInfo) {
+        if (updateInfo != null && context.mounted) {
+          showDialog(
+            context: context,
+            builder: (_) => DownloadFileScreen(updateAvailable: updateInfo),
+          );
+        }
+      });
+    });
+
     ref.listen<Locale>(l10nLocaleStateProvider, (previous, next) {
       _clearCache();
       setState(() {});
