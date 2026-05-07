@@ -375,7 +375,6 @@ class _MangaChapterPageGalleryState
     if (readerMode == null) return const SizedBox.shrink();
     final bool isHorizontalContinuous = readerMode.isHorizontalContinuous;
 
-    final l10n = l10nLocalizations(context)!;
     return ReaderKeyboardHandler(
       onPreviousPage: () => _handlePageNavigation(forward: false),
       onNextPage: () => _handlePageNavigation(forward: true),
@@ -468,9 +467,7 @@ class _MangaChapterPageGalleryState
                                     scrollDirection: _scrollDirection,
                                     reverse: _isReverseHorizontal,
                                     physics: const ClampingScrollPhysics(),
-                                    canScrollPage: (_) {
-                                      return true;
-                                    },
+                                    canScrollPage: (_) => true,
                                     itemBuilder: (context, index) {
                                       int index1 = index * 2;
                                       int index2 = index1 + 1;
@@ -511,224 +508,14 @@ class _MangaChapterPageGalleryState
                                     scrollDirection: _scrollDirection,
                                     reverse: _isReverseHorizontal,
                                     physics: const ClampingScrollPhysics(),
-                                    canScrollPage: (gestureDetails) {
-                                      return true;
-                                    },
-                                    itemBuilder: (BuildContext context, int index) {
-                                      if (pages[index].isTransitionPage) {
-                                        return TransitionViewPaged(
-                                          data: pages[index],
-                                        );
-                                      }
-
-                                      return ImageViewPaged(
-                                        data: pages[index],
-                                        loadStateChanged: (state) {
-                                          if (state.extendedImageLoadState ==
-                                              LoadState.loading) {
-                                            final ImageChunkEvent?
-                                            loadingProgress =
-                                                state.loadingProgress;
-                                            final double progress =
-                                                loadingProgress
-                                                        ?.expectedTotalBytes !=
-                                                    null
-                                                ? loadingProgress!
-                                                          .cumulativeBytesLoaded /
-                                                      loadingProgress
-                                                          .expectedTotalBytes!
-                                                : 0;
-                                            return Container(
-                                              color: getBackgroundColor(
-                                                backgroundColor,
-                                              ),
-                                              height: context.height(0.8),
-                                              child:
-                                                  CircularProgressIndicatorAnimateRotate(
-                                                    progress: progress,
-                                                  ),
-                                            );
-                                          }
-                                          if (state.extendedImageLoadState ==
-                                              LoadState.completed) {
-                                            if (_failedToLoadImage.value ==
-                                                true) {
-                                              Future.delayed(
-                                                const Duration(
-                                                  milliseconds: 10,
-                                                ),
-                                              ).then(
-                                                (value) =>
-                                                    _failedToLoadImage.value =
-                                                        false,
-                                              );
-                                            }
-                                            return ExtendedImageGesture(
-                                              state,
-                                              canScaleImage: (_) => true,
-                                              imageBuilder:
-                                                  (
-                                                    Widget image, {
-                                                    ExtendedImageGestureState?
-                                                    imageGestureState,
-                                                  }) {
-                                                    return image;
-                                                  },
-                                            );
-                                          }
-                                          if (state.extendedImageLoadState ==
-                                              LoadState.failed) {
-                                            if (_failedToLoadImage.value ==
-                                                false) {
-                                              Future.delayed(
-                                                const Duration(
-                                                  milliseconds: 10,
-                                                ),
-                                              ).then(
-                                                (value) =>
-                                                    _failedToLoadImage.value =
-                                                        true,
-                                              );
-                                            }
-                                            return Container(
-                                              color: getBackgroundColor(
-                                                backgroundColor,
-                                              ),
-                                              height: context.height(0.8),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    l10n.image_loading_error,
-                                                    style: TextStyle(
-                                                      color: Colors.white
-                                                          .withValues(
-                                                            alpha: 0.7,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                          8.0,
-                                                        ),
-                                                    child: GestureDetector(
-                                                      onLongPress: () {
-                                                        state.reLoadImage();
-                                                        _failedToLoadImage
-                                                                .value =
-                                                            false;
-                                                      },
-                                                      onTap: () {
-                                                        state.reLoadImage();
-                                                        _failedToLoadImage
-                                                                .value =
-                                                            false;
-                                                      },
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          color: context
-                                                              .primaryColor,
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                30,
-                                                              ),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets.symmetric(
-                                                                vertical: 8,
-                                                                horizontal: 16,
-                                                              ),
-                                                          child: Text(
-                                                            l10n.retry,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          }
-                                          return const SizedBox.shrink();
-                                        },
-                                        initGestureConfigHandler: (state) {
-                                          return GestureConfig(
-                                            inertialSpeed: 200,
-                                            inPageView: true,
-                                            maxScale: 8,
-                                            animationMaxScale: 8,
-                                            cacheGesture: true,
-                                            hitTestBehavior:
-                                                HitTestBehavior.translucent,
+                                    canScrollPage: (gestureDetails) => true,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                          return _buildPagedItem(
+                                            index,
+                                            backgroundColor,
                                           );
                                         },
-                                        onDoubleTap: (state) {
-                                          final Offset? pointerDownPosition =
-                                              state.pointerDownPosition;
-                                          final double? begin =
-                                              state.gestureDetails!.totalScale;
-                                          double end;
-
-                                          //remove old
-                                          _doubleClickAnimation?.removeListener(
-                                            _doubleClickAnimationListener,
-                                          );
-
-                                          //stop pre
-                                          _doubleClickAnimationController
-                                              .stop();
-
-                                          //reset to use
-                                          _doubleClickAnimationController
-                                              .reset();
-
-                                          if (begin == doubleTapScales[0]) {
-                                            end = doubleTapScales[1];
-                                          } else {
-                                            end = doubleTapScales[0];
-                                          }
-
-                                          _doubleClickAnimationListener = () {
-                                            state.handleDoubleTap(
-                                              scale:
-                                                  _doubleClickAnimation!.value,
-                                              doubleTapPosition:
-                                                  pointerDownPosition,
-                                            );
-                                          };
-
-                                          _doubleClickAnimation =
-                                              Tween(
-                                                begin: begin,
-                                                end: end,
-                                              ).animate(
-                                                CurvedAnimation(
-                                                  curve: Curves.ease,
-                                                  parent:
-                                                      _doubleClickAnimationController,
-                                                ),
-                                              );
-
-                                          _doubleClickAnimation!.addListener(
-                                            _doubleClickAnimationListener,
-                                          );
-
-                                          _doubleClickAnimationController
-                                              .forward();
-                                        },
-                                        onLongPressData: (datas) {
-                                          ImageActionsDialog.show(
-                                            context: context,
-                                            data: datas,
-                                            manga: widget.chapter.manga.value!,
-                                            chapterName: widget.chapter.name!,
-                                          );
-                                        },
-                                      );
-                                    },
                                     itemCount: pages.length,
                                     onPageChanged: _onPageChanged,
                                   ),
@@ -909,6 +696,134 @@ class _MangaChapterPageGalleryState
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  ConsumerWidget _buildPagedItem(int index, BackgroundColor backgroundColor) {
+    final page = pages[index];
+    if (page.isTransitionPage) return TransitionViewPaged(data: page);
+
+    return ImageViewPaged(
+      data: page,
+      loadStateChanged: (state) {
+        if (state.extendedImageLoadState == LoadState.loading) {
+          final ImageChunkEvent? loadingProgress = state.loadingProgress;
+          final double progress = loadingProgress?.expectedTotalBytes != null
+              ? loadingProgress!.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+              : 0;
+          return Container(
+            color: getBackgroundColor(backgroundColor),
+            height: context.height(0.8),
+            child: CircularProgressIndicatorAnimateRotate(progress: progress),
+          );
+        }
+        if (state.extendedImageLoadState == LoadState.completed) {
+          if (_failedToLoadImage.value) {
+            Future.delayed(
+              const Duration(milliseconds: 10),
+            ).then((value) => _failedToLoadImage.value = false);
+          }
+          return ExtendedImageGesture(
+            state,
+            canScaleImage: (_) => true,
+            imageBuilder: (image, {imageGestureState}) => image,
+          );
+        }
+        if (state.extendedImageLoadState == LoadState.failed) {
+          if (!_failedToLoadImage.value) {
+            Future.delayed(
+              const Duration(milliseconds: 10),
+            ).then((value) => _failedToLoadImage.value = true);
+          }
+          final l10n = l10nLocalizations(context)!;
+          return Container(
+            color: getBackgroundColor(backgroundColor),
+            height: context.height(0.8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  l10n.image_loading_error,
+                  style: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onLongPress: () {
+                      state.reLoadImage();
+                      _failedToLoadImage.value = false;
+                    },
+                    onTap: () {
+                      state.reLoadImage();
+                      _failedToLoadImage.value = false;
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: context.primaryColor,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 16,
+                        ),
+                        child: Text(l10n.retry),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
+      initGestureConfigHandler: (state) => GestureConfig(
+        inertialSpeed: 200,
+        inPageView: true,
+        maxScale: 8,
+        animationMaxScale: 8,
+        cacheGesture: true,
+        hitTestBehavior: HitTestBehavior.translucent,
+      ),
+      onDoubleTap: (state) {
+        final Offset? pointerDownPosition = state.pointerDownPosition;
+        final double? begin = state.gestureDetails!.totalScale;
+        final end = begin == doubleTapScales[0]
+            ? doubleTapScales[1]
+            : doubleTapScales[0];
+
+        //remove old
+        _doubleClickAnimation?.removeListener(_doubleClickAnimationListener);
+
+        // stop pre and reset to use
+        _doubleClickAnimationController
+          ..stop()
+          ..reset();
+
+        _doubleClickAnimationListener = () {
+          state.handleDoubleTap(
+            scale: _doubleClickAnimation!.value,
+            doubleTapPosition: pointerDownPosition,
+          );
+        };
+
+        _doubleClickAnimation = Tween(begin: begin, end: end).animate(
+          CurvedAnimation(
+            curve: Curves.ease,
+            parent: _doubleClickAnimationController,
+          ),
+        )..addListener(_doubleClickAnimationListener);
+
+        _doubleClickAnimationController.forward();
+      },
+      onLongPressData: (datas) => ImageActionsDialog.show(
+        context: context,
+        data: datas,
+        manga: widget.chapter.manga.value!,
+        chapterName: widget.chapter.name!,
       ),
     );
   }
