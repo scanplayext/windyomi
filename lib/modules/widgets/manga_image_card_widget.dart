@@ -64,35 +64,9 @@ class MangaImageCardWidget extends ConsumerWidget {
               cache: true,
               cacheMaxAge: const Duration(days: 7),
             ),
-      onTap: () => pushToMangaReaderDetail(
-        ref: ref,
-        context: context,
-        getManga: getMangaDetail!,
-        lang: source.lang!,
-        source: source.name!,
-        itemType: itemType,
-        sourceId: source.id,
-      ),
-      onLongPress: () => pushToMangaReaderDetail(
-        ref: ref,
-        context: context,
-        getManga: getMangaDetail!,
-        lang: source.lang!,
-        source: source.name!,
-        itemType: itemType,
-        addToFavourite: true,
-        sourceId: source.id,
-      ),
-      onSecondaryTap: () => pushToMangaReaderDetail(
-        ref: ref,
-        context: context,
-        getManga: getMangaDetail!,
-        lang: source.lang!,
-        source: source.name!,
-        itemType: itemType,
-        addToFavourite: true,
-        sourceId: source.id,
-      ),
+      onTap: () => _toMangaRdD(ref, context, false),
+      onLongPress: () => _toMangaRdD(ref, context, true),
+      onSecondaryTap: () => _toMangaRdD(ref, context, true),
       children: [
         Container(
           color: hasData && libraryManga!.favorite!
@@ -127,6 +101,19 @@ class MangaImageCardWidget extends ConsumerWidget {
             text: getMangaDetail!.name!,
           ),
       ],
+    );
+  }
+
+  Future<void> _toMangaRdD(WidgetRef ref, BuildContext context, bool favorite) {
+    return pushToMangaReaderDetail(
+      ref: ref,
+      context: context,
+      getManga: getMangaDetail!,
+      lang: source.lang!,
+      source: source.name!,
+      itemType: itemType,
+      addToFavourite: favorite,
+      sourceId: source.id,
     );
   }
 }
