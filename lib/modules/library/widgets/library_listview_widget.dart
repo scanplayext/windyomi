@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/download.dart';
+import 'package:mangayomi/modules/library/providers/library_filter_provider.dart';
 import 'package:mangayomi/modules/library/providers/isar_providers.dart';
 import 'package:mangayomi/modules/library/providers/library_state_provider.dart';
 import 'package:mangayomi/models/manga.dart';
@@ -205,23 +203,24 @@ class LibraryListViewWidget extends StatelessWidget {
                                         ),
                                         child: Consumer(
                                           builder: (context, ref, child) {
-                                            final chapterIds = entry.chapters
-                                                .toList()
-                                                .map((c) => c.id)
-                                                .whereType<int>()
-                                                .toList();
-                                            List nbrDown = chapterIds.isNotEmpty
-                                                ? isar.downloads
-                                                      .filter()
-                                                      .anyOf(
-                                                        chapterIds,
-                                                        (q, id) =>
-                                                            q.idEqualTo(id),
-                                                      )
-                                                      .isDownloadEqualTo(true)
-                                                      .findAllSync()
-                                                : [];
-                                            if (nbrDown.isNotEmpty) {
+                                            final downloadedIds =
+                                                ref
+                                                    .watch(
+                                                      downloadedChapterIdsProvider,
+                                                    )
+                                                    .asData
+                                                    ?.value ??
+                                                const <int>{};
+                                            final nbrDown = entry.chapters
+                                                .where(
+                                                  (c) =>
+                                                      c.id != null &&
+                                                      downloadedIds.contains(
+                                                        c.id,
+                                                      ),
+                                                )
+                                                .length;
+                                            if (nbrDown > 0) {
                                               return Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
@@ -242,7 +241,7 @@ class LibraryListViewWidget extends StatelessWidget {
                                                         right: 3,
                                                       ),
                                                   child: Text(
-                                                    nbrDown.length.toString(),
+                                                    nbrDown.toString(),
                                                     style: const TextStyle(
                                                       color: Colors.white,
                                                     ),
