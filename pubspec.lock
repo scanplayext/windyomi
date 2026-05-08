@@ -1000,7 +1000,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "0965c5becba2e826473330eb9ea99dc7030fcf99"
+      resolved-ref: a2b673f292e68ed51e721d33b7b9ac350b6c5a19
       url: "https://github.com/kodjodevf/m_extension_server.git"
     source: git
     version: "0.0.2"
