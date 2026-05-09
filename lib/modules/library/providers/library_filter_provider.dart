@@ -9,13 +9,12 @@ part 'library_filter_provider.g.dart';
 /// Pre-fetches all downloaded chapter IDs in a single Isar query.
 /// Returns a [Set<int>] for O(1) lookup instead of per-chapter queries.
 @riverpod
-Set<int> downloadedChapterIds(Ref ref) {
-  final downloads = isar.downloads
+Stream<Set<int>> downloadedChapterIds(Ref ref) {
+  return isar.downloads
       .filter()
       .isDownloadEqualTo(true)
-      .idProperty()
-      .findAllSync();
-  return downloads.whereType<int>().toSet();
+      .watch(fireImmediately: true)
+      .map((list) => list.map((d) => d.id).whereType<int>().toSet());
 }
 
 /// Pre-fetches all manga IDs that have at least one tracking entry.
@@ -41,7 +40,8 @@ List<Manga> filteredLibraryManga(
   required String searchQuery,
   required bool ignoreFiltersOnSearch,
 }) {
-  final downloadedIds = ref.watch(downloadedChapterIdsProvider);
+  final downloadedIds =
+      ref.watch(downloadedChapterIdsProvider).asData?.value ?? const <int>{};
   final trackedIds = ref.watch(trackedMangaIdsProvider);
 
   return _filterAndSortManga(

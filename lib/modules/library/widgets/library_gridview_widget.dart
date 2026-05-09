@@ -173,9 +173,14 @@ class _LibraryGridViewWidgetState extends State<LibraryGridViewWidget> {
                                         builder: (context, ref, child) {
                                           int downloadCount = 0;
                                           if (widget.downloadedChapter) {
-                                            final downloadedIds = ref.watch(
-                                              downloadedChapterIdsProvider,
-                                            );
+                                            final downloadedIds =
+                                                ref
+                                                    .watch(
+                                                      downloadedChapterIdsProvider,
+                                                    )
+                                                    .asData
+                                                    ?.value ??
+                                                const <int>{};
                                             downloadCount = entry.chapters
                                                 .where(
                                                   (c) =>
