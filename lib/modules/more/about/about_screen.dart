@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,7 @@ import 'package:mangayomi/eval/model/m_bridge.dart';
 import 'package:mangayomi/main.dart';
 import 'package:mangayomi/models/settings.dart';
 import 'package:mangayomi/modules/more/about/providers/check_for_update.dart';
+import 'package:mangayomi/modules/more/about/providers/download_file_screen.dart';
 import 'package:mangayomi/modules/more/about/providers/get_package_info.dart';
 import 'package:mangayomi/modules/more/about/providers/logs_state.dart';
 import 'package:mangayomi/modules/widgets/progress_center.dart';
@@ -73,13 +75,33 @@ class AboutScreen extends ConsumerWidget {
                         },
                       ),
                       ListTile(
-                        onTap: () {
-                          ref.read(
-                            checkForUpdateProvider(
-                              context: context,
-                              manualUpdate: true,
-                            ),
-                          );
+                        onTap: () async {
+                          BotToast.showText(text: l10n.searching_for_updates);
+                          try {
+                            final updateInfo = await performManualUpdateCheck();
+                            if (updateInfo != null) {
+                              BotToast.showText(
+                                text: l10n.new_update_available,
+                              );
+                              await Future.delayed(const Duration(seconds: 1));
+                              if (context.mounted) {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => DownloadFileScreen(
+                                    updateAvailable: updateInfo,
+                                  ),
+                                );
+                              }
+                            } else {
+                              BotToast.showText(
+                                text: l10n.no_new_updates_available,
+                              );
+                            }
+                          } catch (_) {
+                            BotToast.showText(
+                              text: l10n.no_new_updates_available,
+                            );
+                          }
                         },
                         title: Text(l10n.check_for_update),
                       ),
