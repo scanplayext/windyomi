@@ -895,7 +895,7 @@ class SortLibraryMangaState extends _$SortLibraryMangaState {
   }
 
   bool isReverse() {
-    return state.reverse!;
+    return state.reverse ?? false;
   }
 }
 
