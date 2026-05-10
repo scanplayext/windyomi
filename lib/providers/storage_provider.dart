@@ -181,7 +181,17 @@ class StorageProvider {
   }
 
   Future<Directory?> getDatabaseDirectory() async {
-    final dir = await getApplicationDocumentsDirectory();
+    // On macOS, host the libmdbx / Isar database under Application Support
+    // (app-private, not TCC-gated) instead of Documents. macOS denies
+    // unsigned/sideloaded/dev builds access to ~/Documents when iCloud
+    // "Desktop & Documents Folders" sync is enabled, surfacing as
+    // `IsarError: Cannot open Environment: MdbxError (13): Permission denied`
+    // and a black screen on launch. iOS keeps Documents so the DB remains
+    // visible alongside backups via the Files app. Windows / Linux are
+    // untouched — Documents is the conventional location there.
+    final dir = Platform.isMacOS
+        ? await getApplicationSupportDirectory()
+        : await getApplicationDocumentsDirectory();
     String dbDir;
     if (Platform.isAndroid) return dir;
     if (Platform.isIOS) {
@@ -191,8 +201,45 @@ class StorageProvider {
     } else {
       dbDir = path.join(dir.path, 'Mangayomi', 'databases');
     }
+    if (Platform.isMacOS) {
+      await _migrateLegacyMacosDatabase(dbDir);
+    }
     await createDirectorySafely(dbDir);
     return Directory(dbDir);
+  }
+
+  /// One-shot migration: if a pre-existing macOS user has their database
+  /// under the legacy Documents path and the new Application Support path
+  /// is empty, rename it across so library / history / progress are not
+  /// silently reset. Subsequent launches skip this branch because the new
+  /// path already exists.
+  Future<void> _migrateLegacyMacosDatabase(String newDbDir) async {
+    try {
+      final docs = await getApplicationDocumentsDirectory();
+      final legacyDir = Directory(
+        path.join(docs.path, 'Mangayomi', 'databases'),
+      );
+      if (!await legacyDir.exists()) return;
+      final newDir = Directory(newDbDir);
+      if (await newDir.exists()) {
+        // Only migrate when the new location is empty — never overwrite.
+        final entries = await newDir
+            .list(followLinks: false)
+            .take(1)
+            .toList();
+        if (entries.isNotEmpty) return;
+      }
+      await Directory(path.dirname(newDbDir)).create(recursive: true);
+      await legacyDir.rename(newDbDir);
+      debugPrint(
+        '[storage] Migrated macOS DB from ${legacyDir.path} to $newDbDir',
+      );
+    } catch (e) {
+      // Migration is best-effort. Falling back to a fresh DB is preferable
+      // to crashing on launch — the user can manually move the legacy
+      // ~/Documents/Mangayomi/databases/ contents if needed.
+      debugPrint('[storage] macOS DB migration skipped: $e');
+    }
   }
 
   Future<Directory?> getGalleryDirectory() async {
