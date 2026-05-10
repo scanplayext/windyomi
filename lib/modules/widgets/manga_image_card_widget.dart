@@ -9,7 +9,7 @@ import 'package:mangayomi/models/manga.dart';
 import 'package:mangayomi/models/settings.dart';
 import 'package:mangayomi/models/source.dart';
 import 'package:mangayomi/modules/manga/detail/manga_detail_main.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
+import 'package:mangayomi/utils/cached_network.dart';
 import 'package:mangayomi/router/router.dart';
 import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
 import 'package:mangayomi/utils/constant.dart';
@@ -46,7 +46,7 @@ class MangaImageCardWidget extends ConsumerWidget {
       image: hasData && libraryManga!.customCoverImage != null
           ? MemoryImage(libraryManga!.customCoverImage as Uint8List)
                 as ImageProvider
-          : CustomExtendedNetworkImageProvider(
+          : coverProvider(
               toImgUrl(
                 hasData
                     ? libraryManga!.customCoverFromTracker ??
@@ -61,7 +61,6 @@ class MangaImageCardWidget extends ConsumerWidget {
                   sourceId: source.id,
                 ),
               ),
-              cache: true,
               cacheMaxAge: const Duration(days: 7),
             ),
       onTap: () => pushToMangaReaderDetail(
@@ -151,7 +150,7 @@ class MangaImageCardListTileWidget extends ConsumerWidget {
     final image = hasData && libraryManga!.customCoverImage != null
         ? MemoryImage(libraryManga!.customCoverImage as Uint8List)
               as ImageProvider
-        : CustomExtendedNetworkImageProvider(
+        : coverProvider(
             toImgUrl(
               hasData
                   ? libraryManga!.customCoverFromTracker ??

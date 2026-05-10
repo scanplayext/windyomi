@@ -7,7 +7,7 @@ import 'package:mangayomi/modules/library/providers/library_state_provider.dart'
 import 'package:mangayomi/models/manga.dart';
 import 'package:mangayomi/modules/library/widgets/continue_reader_button.dart';
 import 'package:mangayomi/modules/manga/detail/providers/state_providers.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
+import 'package:mangayomi/utils/cached_network.dart';
 import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
 import 'package:mangayomi/utils/constant.dart';
 import 'package:mangayomi/utils/headers.dart';
@@ -77,7 +77,7 @@ class _LibraryGridViewWidgetState extends State<LibraryGridViewWidget> {
                     image: entry.customCoverImage != null
                         ? MemoryImage(entry.customCoverImage as Uint8List)
                               as ImageProvider
-                        : CustomExtendedNetworkImageProvider(
+                        : coverProvider(
                             toImgUrl(
                               entry.customCoverFromTracker ??
                                   entry.imageUrl ??
