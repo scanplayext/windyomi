@@ -88,12 +88,10 @@ class _MangaDetailsViewState extends ConsumerState<MangaDetailsView> {
                           .where(
                             (element) => element.mangaId == widget.manga.id,
                           )
-                          .toList()
-                          .reversed
                           .toList();
 
                       if (entries.isNotEmpty && !incognitoMode) {
-                        final chap = entries.first.chapter.value!;
+                        final chap = entries.last.chapter.value!;
                         return CustomFloatingActionBtn(
                           isExtended: !isExtended,
                           label: l10n.resume,
@@ -102,29 +100,14 @@ class _MangaDetailsViewState extends ConsumerState<MangaDetailsView> {
                           },
                         );
                       }
-                      return CustomFloatingActionBtn(
-                        isExtended: !isExtended,
-                        label: buttonLabel,
-                        onPressed: () {
-                          widget.manga.chapters
-                              .toList()
-                              .reversed
-                              .toList()
-                              .last
-                              .pushToReaderView(context);
-                        },
-                      );
                     }
                     return CustomFloatingActionBtn(
                       isExtended: !isExtended,
                       label: buttonLabel,
                       onPressed: () {
-                        widget.manga.chapters
-                            .toList()
-                            .reversed
-                            .toList()
-                            .last
-                            .pushToReaderView(context);
+                        widget.manga.chapters.toList().first.pushToReaderView(
+                          context,
+                        );
                       },
                     );
                   },

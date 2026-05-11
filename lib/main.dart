@@ -63,6 +63,14 @@ void main(List<String> args) async {
       WidgetsFlutterBinding.ensureInitialized();
       if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
 
+      // Cap the decoded image cache so a large library grid can't fill the
+      // default 100 MB ceiling with full-resolution covers and OOM constrained
+      // mobile heaps. Mobile gets a tight 64 MB; desktop keeps 256 MB. The
+      // encoded-bytes LRU in CustomExtendedNetworkImageProvider (50 MB) is a
+      // separate cache and is not affected by this setting.
+      PaintingBinding.instance.imageCache.maximumSizeBytes =
+          isMobile ? 64 << 20 : 256 << 20;
+
       // Widget-layer errors (build / layout / paint)
       FlutterError.onError = (FlutterErrorDetails details) {
         FlutterError.presentError(details); // keep default red-screen in debug
@@ -204,13 +212,10 @@ class _MyAppState extends ConsumerState<MyApp>
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {
-        child = BotToastInit()(context, child);
-        final appChild = child;
-        if (!isMobile) {
-          child = _MouseBackButtonHandler(router: router, child: appChild);
-        } else {
-          child = appChild;
-        }
+        final base = BotToastInit()(context, child);
+        final withBackHandler = !isMobile
+            ? _MouseBackButtonHandler(router: router, child: base)
+            : base;
 
         if (!Platform.isLinux) {
           final isUnlocked = ref.watch(appUnlockedStateProvider);
@@ -218,12 +223,12 @@ class _MyAppState extends ConsumerState<MyApp>
           if (lockEnabled && !isUnlocked) {
             return Stack(
               fit: StackFit.expand,
-              children: [child, const AppLockScreen()],
+              children: [withBackHandler, const AppLockScreen()],
             );
           }
         }
 
-        return child;
+        return withBackHandler;
       },
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
