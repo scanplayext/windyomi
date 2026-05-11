@@ -60,6 +60,7 @@ import 'package:windyomi/modules/more/settings/general/general_screen.dart';
 import 'package:windyomi/modules/more/settings/reader/reader_screen.dart';
 import 'package:windyomi/modules/more/settings/settings_screen.dart';
 import 'package:windyomi/modules/more/settings/security/security_screen.dart';
+import 'package:windyomi/modules/torrent/torrent_stream_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/cupertino.dart';
 part 'router.g.dart';
@@ -216,6 +217,7 @@ class RouterNotifier extends ChangeNotifier {
     ),
     _genericRoute(name: "downloads", child: const DownloadsScreen()),
     _genericRoute(name: "dataAndStorage", child: const DataAndStorage()),
+    _genericRoute(name: "torrentStream", child: const TorrentStreamScreen()),
     _genericRoute(name: "security", child: const SecurityScreen()),
     _genericRoute(name: "manageTrackers", child: const ManageTrackersScreen()),
     _genericRoute<TrackPreference>(

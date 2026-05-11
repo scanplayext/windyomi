@@ -87,6 +87,13 @@ class MoreScreenState extends ConsumerState<MoreScreen> {
             ),
             ListTileWidget(
               onTap: () {
+                context.push('/torrentStream');
+              },
+              icon: Icons.movie_outlined,
+              title: 'Torrents',
+            ),
+            ListTileWidget(
+              onTap: () {
                 context.push('/dataAndStorage');
               },
               icon: Icons.storage,
