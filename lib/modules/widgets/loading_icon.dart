@@ -6,11 +6,10 @@ class LoadingIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF070B13),
       body: Center(
         child: Image.asset(
           "assets/app_icons/icon.png",
-          color: Colors.black,
           fit: BoxFit.cover,
           height: 100,
         ),
