@@ -94,6 +94,13 @@ class MoreScreenState extends ConsumerState<MoreScreen> {
             ),
             ListTileWidget(
               onTap: () {
+                context.push('/stremioAddons');
+              },
+              icon: Icons.extension_outlined,
+              title: 'Stremio Addons',
+            ),
+            ListTileWidget(
+              onTap: () {
                 context.push('/dataAndStorage');
               },
               icon: Icons.storage,

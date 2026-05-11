@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:windyomi/models/chapter.dart';
 import 'package:windyomi/models/video.dart';
@@ -24,6 +25,24 @@ Future<(List<Video>, bool, List<String>, Directory?)> getVideoList(
   try {
     final storageProvider = StorageProvider();
     final mpvDirectory = await storageProvider.getMpvDirectory();
+    List<String> infoHashes = [];
+    final episodePayload = _decodeEpisodePayload(episode.description);
+    if (episode.manga.value!.source == "stremio-direct") {
+      final url = episode.url ?? "";
+      if (url.isEmpty) {
+        throw StateError("El stream directo no contiene URL.");
+      }
+      final headers = _decodeHeaders(episodePayload["headers"]);
+      final subtitles = _decodeTracks(episodePayload["subtitles"]);
+      final title = episode.name ?? episode.manga.value!.name ?? "Stream";
+      keepAlive.close();
+      return (
+        [Video(url, title, url, headers: headers, subtitles: subtitles)],
+        false,
+        infoHashes,
+        mpvDirectory,
+      );
+    }
     final mangaDirectory = await storageProvider.getMangaMainDirectory(episode);
     final isLocalArchive =
         episode.manga.value!.isLocalArchive! &&
@@ -32,7 +51,6 @@ Future<(List<Video>, bool, List<String>, Directory?)> getVideoList(
       mangaDirectory!.path,
       "${episode.name!.replaceForbiddenCharacters(' ')}.mp4",
     );
-    List<String> infoHashes = [];
     if (await File(mp4animePath).exists() || isLocalArchive) {
       final animeDir =
           episode.archivePath != null && episode.manga.value?.source == "local"
@@ -107,7 +125,7 @@ Future<(List<Video>, bool, List<String>, Directory?)> getVideoList(
           v.url,
           episode.archivePath,
         );
-        for (var video in videos) {
+        for (var video in _filterTorrentVideos(videos, episodePayload)) {
           torrentList.add(
             video..quality = video.quality.substringBeforeLast("."),
           );
@@ -142,4 +160,52 @@ Future<(List<Video>, bool, List<String>, Directory?)> getVideoList(
     keepAlive.close();
     rethrow;
   }
+}
+
+Map<String, dynamic> _decodeEpisodePayload(String? raw) {
+  if (raw == null || raw.trim().isEmpty) return const {};
+  try {
+    final json = jsonDecode(raw);
+    if (json is Map) return Map<String, dynamic>.from(json);
+  } catch (_) {}
+  return const {};
+}
+
+Map<String, String>? _decodeHeaders(dynamic raw) {
+  if (raw is! Map) return null;
+  final headers = raw.map((key, value) => MapEntry('$key', '$value'));
+  return headers.isEmpty ? null : headers;
+}
+
+List<Track> _decodeTracks(dynamic raw) {
+  if (raw is! List) return const [];
+  return raw
+      .whereType<Map>()
+      .map(
+        (e) =>
+            Track(file: e["file"]?.toString(), label: e["label"]?.toString()),
+      )
+      .where((e) => e.file?.isNotEmpty ?? false)
+      .toList();
+}
+
+List<Video> _filterTorrentVideos(
+  List<Video> videos,
+  Map<String, dynamic> payload,
+) {
+  final filename = payload["filename"]?.toString().trim();
+  if (filename != null && filename.isNotEmpty) {
+    final match = videos.where((e) => e.quality == filename).toList();
+    if (match.isNotEmpty) return match;
+  }
+
+  final fileIdx = payload["fileIdx"];
+  final index = fileIdx is int
+      ? fileIdx
+      : int.tryParse(fileIdx?.toString() ?? "");
+  if (index != null && index >= 0 && index < videos.length) {
+    return [videos[index]];
+  }
+
+  return videos;
 }
