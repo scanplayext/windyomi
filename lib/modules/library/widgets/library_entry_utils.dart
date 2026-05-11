@@ -6,19 +6,21 @@ import 'package:mangayomi/modules/library/providers/library_filter_provider.dart
 import 'package:mangayomi/modules/library/providers/library_state_provider.dart';
 import 'package:mangayomi/models/manga.dart';
 import 'package:mangayomi/modules/manga/detail/providers/state_providers.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
 import 'package:mangayomi/modules/widgets/manga_image_card_widget.dart';
+import 'package:mangayomi/utils/cached_network.dart';
 import 'package:mangayomi/utils/constant.dart';
 import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
 import 'package:mangayomi/utils/headers.dart';
 
 /// Resolves the correct [ImageProvider] for a manga entry, preferring a custom
-/// local cover over the remote URL.
+/// local cover over the remote URL. Remote covers are wrapped in
+/// [coverProvider] so they decode at thumbnail resolution rather than the
+/// source resolution — see refs #609.
 ImageProvider resolveCoverImage(Manga entry, WidgetRef ref) {
   if (entry.customCoverImage != null) {
     return MemoryImage(entry.customCoverImage as Uint8List);
   }
-  return CustomExtendedNetworkImageProvider(
+  return coverProvider(
     toImgUrl(entry.customCoverFromTracker ?? entry.imageUrl ?? ''),
     headers: (entry.isLocalArchive ?? false)
         ? null
