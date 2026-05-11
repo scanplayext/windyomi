@@ -1,0 +1,66 @@
+name: Build Unsigned iOS IPA
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  build-ios-unsigned:
+    name: Build unsigned IPA
+    runs-on: macos-15
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          architecture: x64
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-ios,x86_64-apple-ios
+
+      - name: Setup Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+          cache-on-failure: true
+
+      - name: Install flutter_rust_bridge_codegen
+        run: cargo install flutter_rust_bridge_codegen
+
+      - name: Print tool versions
+        run: |
+          xcodebuild -version
+          flutter --version
+          rustc --version
+
+      - name: Fetch Flutter dependencies
+        run: flutter pub get
+
+      - name: Build iOS app without signing
+        run: flutter build ios --release --no-codesign
+
+      - name: Package unsigned IPA
+        run: |
+          rm -rf build/ios/ipa_unsigned
+          mkdir -p build/ios/ipa_unsigned/Payload
+          cp -R build/ios/iphoneos/Runner.app build/ios/ipa_unsigned/Payload/Runner.app
+          cd build/ios/ipa_unsigned
+          zip -qry ../Windyomi-unsigned-ios.ipa Payload
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windyomi-unsigned-ios
+          path: build/ios/Windyomi-unsigned-ios.ipa
+          retention-days: 14
