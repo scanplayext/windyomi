@@ -509,9 +509,14 @@ Future<void> _downloadFile(
         var request = Request('GET', Uri.parse(pageUrl.url));
         request.headers.addAll(pageUrl.headers ?? {});
         StreamedResponse response = await client.send(request);
-        if (response.statusCode != 200) {
+        // Accept any 2xx — including 206 Partial Content, which the server
+        // returns when the source extension sends `Range: bytes=0-` on the
+        // streaming request (e.g. AnimeGG). Rejecting 206 here caused 3
+        // retries → silent stall.
+        if (response.statusCode < 200 || response.statusCode >= 300) {
           throw DownloadPoolException(
-            'Failed to download file: ${pageUrl.fileName!}',
+            'Failed to download file: ${pageUrl.fileName!} '
+            '(status ${response.statusCode})',
           );
         }
         int total = response.contentLength ?? 0;
@@ -617,8 +622,12 @@ Future<void> _downloadSegment(
     }
     StreamedResponse response = await _withRetry(() => client.send(request), 3);
 
-    if (response.statusCode != 200) {
-      throw DownloadPoolException('Failed to download segment: ${ts.name}');
+    // Accept any 2xx (including 206 Partial Content) — see comment in
+    // _downloadFile.
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw DownloadPoolException(
+        'Failed to download segment: ${ts.name} (status ${response.statusCode})',
+      );
     }
 
     final sink = file.openWrite();
