@@ -1,5 +1,5 @@
 import 'package:d4rt/d4rt.dart';
-import 'package:mangayomi/eval/model/filter.dart';
+import 'package:windyomi/eval/model/filter.dart';
 
 class FilterBridge {
   final filterBridgedClass = BridgedClass(
@@ -321,47 +321,47 @@ class FilterBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       filterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       selectFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       selectFilterOptionBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       separatorFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       textFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       sortFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       triStateFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       groupFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       checkBoxFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       sortStateBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       headerFilterBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

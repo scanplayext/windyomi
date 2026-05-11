@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/services/isolate_service.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/services/isolate_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'get_detail.g.dart';
 

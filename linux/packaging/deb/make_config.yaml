@@ -1,10 +1,10 @@
-display_name: Mangayomi
+display_name: Windyomi
 
-package_name: mangayomi
+package_name: windyomi
 
 maintainer:
-  name: kodjodevf
-  email: kodjomoustapha@gmail.com
+  name: scanplayext
+  email: scanplayext@users.noreply.github.com
 
 priority: optional
 
@@ -19,10 +19,10 @@ depencencies:
 essential: false
 
 postinstall_scripts:
-  - echo "Installed Mangayomi successfully"
+  - echo "Installed Windyomi successfully"
   
 postuninstall_scripts:
-  - echo "Uninstalled Mangayomi successfully"
+  - echo "Uninstalled Windyomi successfully"
 icon: assets/app_icons/icon-red.png
 
 keywords:

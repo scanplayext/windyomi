@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:mangayomi/services/http/m_client.dart';
+import 'package:windyomi/services/http/m_client.dart';
 
 Future<List<ImdbTitle>> fetchImdbTitles(String query) async {
   final http = MClient.init(reqcopyWith: {'useDartHttpClient': true});

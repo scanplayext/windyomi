@@ -1,6 +1,6 @@
 import 'package:d4rt/d4rt.dart';
 import 'package:html/dom.dart';
-import 'package:mangayomi/eval/model/document.dart';
+import 'package:windyomi/eval/model/document.dart';
 
 class MDocumentBridge {
   final documentBridgedClass = BridgedClass(
@@ -50,7 +50,7 @@ class MDocumentBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       documentBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

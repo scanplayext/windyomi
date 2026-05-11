@@ -1,10 +1,10 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/download.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/manga/download/providers/download_provider.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/download.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/manga/download/providers/download_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'state_providers.g.dart';
 

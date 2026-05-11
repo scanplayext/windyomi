@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mangayomi/modules/more/widgets/list_tile_widget.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/modules/more/widgets/list_tile_widget.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

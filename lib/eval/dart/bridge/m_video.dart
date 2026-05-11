@@ -1,5 +1,5 @@
 import 'package:d4rt/d4rt.dart';
-import 'package:mangayomi/models/video.dart';
+import 'package:windyomi/models/video.dart';
 
 class MVideoBridge {
   final mVideoBridgedClass = BridgedClass(
@@ -43,7 +43,7 @@ class MVideoBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mVideoBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

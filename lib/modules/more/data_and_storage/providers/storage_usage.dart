@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/router/router.dart';
-import 'package:mangayomi/utils/extensions/others.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/router/router.dart';
+import 'package:windyomi/utils/extensions/others.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'storage_usage.g.dart';
 

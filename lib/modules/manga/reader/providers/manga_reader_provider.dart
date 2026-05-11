@@ -1,6 +1,6 @@
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/services/get_chapter_pages.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/services/get_chapter_pages.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'manga_reader_provider.g.dart';
 

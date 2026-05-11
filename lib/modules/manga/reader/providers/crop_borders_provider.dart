@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:isolate';
 import 'package:flutter/foundation.dart';
-import 'package:mangayomi/modules/manga/reader/u_chap_data_preload.dart';
-import 'package:mangayomi/src/rust/api/image.dart';
-import 'package:mangayomi/src/rust/frb_generated.dart';
-import 'package:mangayomi/utils/extensions/others.dart';
+import 'package:windyomi/modules/manga/reader/u_chap_data_preload.dart';
+import 'package:windyomi/src/rust/api/image.dart';
+import 'package:windyomi/src/rust/frb_generated.dart';
+import 'package:windyomi/utils/extensions/others.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'crop_borders_provider.g.dart';
 

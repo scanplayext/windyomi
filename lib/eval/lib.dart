@@ -1,5 +1,5 @@
-import 'package:mangayomi/eval/interface.dart';
-import 'package:mangayomi/models/source.dart';
+import 'package:windyomi/eval/interface.dart';
+import 'package:windyomi/models/source.dart';
 
 import 'dart/service.dart';
 import 'javascript/service.dart';

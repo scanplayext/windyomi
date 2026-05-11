@@ -1,4 +1,4 @@
-name: mangayomi
+name: windyomi
 description: Free and open source manga reader and anime streaming
   cross-plateform app inspired by Tachiyomi and Aniyomi.
 publish_to: "none"
@@ -158,11 +158,11 @@ flutter_launcher_icons:
     image_path: "assets/app_icons/icon-red.png"
 inno_bundle:
   id: 6CB26FFA-E72B-42C3-91E8-594940031CA2
-  publisher: kodjodevf
-  name: Mangayomi
-  url: https://github.com/kodjodevf/mangayomi/
-  support_url: https://github.com/kodjodevf/mangayomi/
-  updates_url: https://github.com/kodjodevf/mangayomi/releases/
+  publisher: scanplayext
+  name: Windyomi
+  url: https://github.com/scanplayext/windyomi/
+  support_url: https://github.com/scanplayext/windyomi/
+  updates_url: https://github.com/scanplayext/windyomi/releases/
   languages:
     - english
     - french

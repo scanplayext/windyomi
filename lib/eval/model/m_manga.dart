@@ -1,6 +1,6 @@
-import 'package:mangayomi/eval/model/m_chapter.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/eval/model/m_chapter.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
 
 class MManga {
   String? name;

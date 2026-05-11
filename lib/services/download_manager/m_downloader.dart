@@ -2,13 +2,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/page.dart';
-import 'package:mangayomi/models/video.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/settings.dart';
-import 'package:mangayomi/services/download_manager/download_isolate_pool.dart';
-import 'package:mangayomi/services/download_manager/m3u8/models/download.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/page.dart';
+import 'package:windyomi/models/video.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/services/http/rhttp/src/model/settings.dart';
+import 'package:windyomi/services/download_manager/download_isolate_pool.dart';
+import 'package:windyomi/services/download_manager/m3u8/models/download.dart';
 import 'package:path/path.dart' as path;
 
 /// Map to allow cancellation of downloads

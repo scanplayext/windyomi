@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/manga/detail/providers/state_providers.dart';
-import 'package:mangayomi/utils/extensions/chapter_extensions.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/manga/detail/providers/state_providers.dart';
+import 'package:windyomi/utils/extensions/chapter_extensions.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'library_state_provider.g.dart';
 

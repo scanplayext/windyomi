@@ -1,5 +1,5 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/models/chapter.dart';
+import 'package:windyomi/models/chapter.dart';
 part 'manga.g.dart';
 
 @collection

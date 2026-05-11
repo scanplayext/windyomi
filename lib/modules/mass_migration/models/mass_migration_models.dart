@@ -1,8 +1,8 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
 
 class MassMigrationSourceGroup {
   const MassMigrationSourceGroup({

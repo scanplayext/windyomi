@@ -2,13 +2,13 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/cached_network.dart';
-import 'package:mangayomi/utils/constant.dart';
-import 'package:mangayomi/utils/headers.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/cached_network.dart';
+import 'package:windyomi/utils/constant.dart';
+import 'package:windyomi/utils/headers.dart';
 
 class MassMigrationSourceIcon extends StatelessWidget {
   const MassMigrationSourceIcon({required this.source, super.key});

@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/manga/reader/providers/color_filter_provider.dart';
-import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/reader/reader_screen.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/platform_utils.dart';
+import 'package:windyomi/modules/manga/reader/providers/color_filter_provider.dart';
+import 'package:windyomi/modules/more/settings/reader/providers/reader_state_provider.dart';
+import 'package:windyomi/modules/more/settings/reader/reader_screen.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/platform_utils.dart';
 
 // ── Color matrix utilities (5×4 row-major, 20 elements) ──
 

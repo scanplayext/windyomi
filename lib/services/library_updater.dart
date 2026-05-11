@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/modules/manga/detail/providers/update_manga_detail_providers.dart';
-import 'package:mangayomi/modules/more/settings/appearance/providers/theme_mode_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/log/logger.dart';
-import 'package:mangayomi/models/manga.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/modules/manga/detail/providers/update_manga_detail_providers.dart';
+import 'package:windyomi/modules/more/settings/appearance/providers/theme_mode_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/log/logger.dart';
+import 'package:windyomi/models/manga.dart';
 
 Future<void> updateLibrary({
   required WidgetRef ref,

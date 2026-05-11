@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/modules/calendar/widgets/calendar_indicator.dart';
+import 'package:windyomi/modules/calendar/widgets/calendar_indicator.dart';
 
 const _maxEvents = 3;
 

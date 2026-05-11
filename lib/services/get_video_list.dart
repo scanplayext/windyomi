@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/video.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/services/isolate_service.dart';
-import 'package:mangayomi/services/torrent_server.dart';
-import 'package:mangayomi/utils/utils.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/video.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/services/isolate_service.dart';
+import 'package:windyomi/services/torrent_server.dart';
+import 'package:windyomi/utils/utils.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:path/path.dart' as p;
 

@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:io'; // For I/O-operations
 import 'dart:typed_data';
 import 'package:isar_community/isar.dart'; // Isar database package for local storage
-import 'package:mangayomi/main.dart'; // Exposes the global `isar` instance
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/library/providers/local_archive.dart';
-import 'package:mangayomi/src/rust/api/epub.dart';
-import 'package:mangayomi/utils/extensions/others.dart';
+import 'package:windyomi/main.dart'; // Exposes the global `isar` instance
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/library/providers/local_archive.dart';
+import 'package:windyomi/src/rust/api/epub.dart';
+import 'package:windyomi/utils/extensions/others.dart';
 import 'package:path/path.dart' as p; // For manipulating file system paths
 import 'package:bot_toast/bot_toast.dart'; // For Exceptions
-import 'package:mangayomi/models/manga.dart'; // Has Manga model and ItemType enum
-import 'package:mangayomi/models/chapter.dart'; // Has Chapter model with archivePath
-import 'package:mangayomi/providers/storage_provider.dart'; // Provides storage directory selection
+import 'package:windyomi/models/manga.dart'; // Has Manga model and ItemType enum
+import 'package:windyomi/models/chapter.dart'; // Has Chapter model with archivePath
+import 'package:windyomi/providers/storage_provider.dart'; // Provides storage directory selection
 import 'package:riverpod_annotation/riverpod_annotation.dart'; // Annotations for code generation
 part 'file_scanner.g.dart';
 
@@ -35,15 +35,15 @@ class LocalFoldersState extends _$LocalFoldersState {
   }
 }
 
-/// Scans `Mangayomi/local` folder (if exists) for Mangas/Animes and imports in library.
+/// Scans `Windyomi/local` folder (if exists) for Mangas/Animes and imports in library.
 ///
 /// **Folder structure:**
 /// ```
-/// Mangayomi/local/MangaName/CustomCover.jpg (optional)
-/// Mangayomi/local/MangaName/Chapter1/Page1.jpg
-/// Mangayomi/local/MangaName/Chapter2.cbz
-/// Mangayomi/local/AnimeName/Episode1.mp4
-/// Mangayomi/local/NovelName/NovelName.epub
+/// Windyomi/local/MangaName/CustomCover.jpg (optional)
+/// Windyomi/local/MangaName/Chapter1/Page1.jpg
+/// Windyomi/local/MangaName/Chapter2.cbz
+/// Windyomi/local/AnimeName/Episode1.mp4
+/// Windyomi/local/NovelName/NovelName.epub
 /// ```
 /// **Supported filetypes:** (taken from lib/modules/library/providers/local_archive.dart, line 98)
 /// ```
@@ -74,9 +74,9 @@ Future<void> _scanDirectory(Ref ref, Directory? dir) async {
       .filter()
       .sourceEqualTo("local")
       .or()
-      .linkContains("Mangayomi/local")
+      .linkContains("Windyomi/local")
       .or()
-      .linkContains("Mangayomi\\local")
+      .linkContains("Windyomi\\local")
       .findAll();
   final mangaMap = {for (var m in existingMangas) _getRelativePath(m.link!): m};
 
@@ -262,9 +262,9 @@ Future<void> _scanDirectory(Ref ref, Directory? dir) async {
         .filter()
         .sourceEqualTo("local")
         .or()
-        .linkContains("Mangayomi/local")
+        .linkContains("Windyomi/local")
         .or()
-        .linkContains("Mangayomi\\local")
+        .linkContains("Windyomi\\local")
         .findAll();
     // Save all retrieved Manga objects (now with id) matching the processedMangas list
     newAddedMangas = savedMangas
@@ -391,9 +391,9 @@ Future<Directory?> getLocalLibrary() async {
   }
 }
 
-/// Finds the String 'Mangayomi/local' and extract path after
+/// Finds the String 'Windyomi/local' and extract path after
 /// ```
-/// "C:\Users\user\Documents\Mangayomi\local\Manga 1\chapter1.zip"
+/// "C:\Users\user\Documents\Windyomi\local\Manga 1\chapter1.zip"
 /// becomes:
 /// "Manga 1/chapter1.zip"
 /// ```
@@ -410,9 +410,9 @@ String _getRelativePath(dynamic dir) {
 
   // Normalize path separators
   relativePath = relativePath.replaceAll("\\", "/");
-  int index = relativePath.indexOf("Mangayomi/local");
+  int index = relativePath.indexOf("Windyomi/local");
   if (index != -1) {
-    return relativePath.substring(index + "Mangayomi/local/".length);
+    return relativePath.substring(index + "Windyomi/local/".length);
   } else {
     return relativePath;
   }

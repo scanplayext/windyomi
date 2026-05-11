@@ -1,6 +1,6 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/source.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/source.dart';
 
 Source? getSource(
   String lang,

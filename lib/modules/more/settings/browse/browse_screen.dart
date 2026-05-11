@@ -1,22 +1,22 @@
-import 'package:mangayomi/utils/platform_utils.dart';
+import 'package:windyomi/utils/platform_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/changed.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/download.dart';
-import 'package:mangayomi/models/history.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/models/update.dart';
-import 'package:mangayomi/modules/more/settings/player/custom_button_screen.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/sync/providers/sync_providers.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/changed.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/download.dart';
+import 'package:windyomi/models/history.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/models/update.dart';
+import 'package:windyomi/modules/more/settings/player/custom_button_screen.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/modules/more/settings/sync/providers/sync_providers.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 class BrowseSScreen extends ConsumerWidget {
   const BrowseSScreen({super.key});

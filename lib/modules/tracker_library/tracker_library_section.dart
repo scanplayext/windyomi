@@ -1,5 +1,5 @@
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/track_search.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/track_search.dart';
 
 class TrackLibrarySection {
   String name;

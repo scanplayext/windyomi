@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:html/dom.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/models/video.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/models/video.dart';
 import 'package:html/parser.dart' as parser;
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
 
 class GogoCdnExtractor {
   final InterceptedClient client = MClient.init(

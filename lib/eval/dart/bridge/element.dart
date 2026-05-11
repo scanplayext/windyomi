@@ -1,6 +1,6 @@
 import 'package:d4rt/d4rt.dart';
 import 'package:html/dom.dart';
-import 'package:mangayomi/eval/model/element.dart';
+import 'package:windyomi/eval/model/element.dart';
 
 class MElementBridge {
   final elementBridgedClass = BridgedClass(
@@ -58,7 +58,7 @@ class MElementBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       elementBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/exception.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/request.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/response.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/settings.dart';
-import 'package:mangayomi/src/rust/api/rhttp/error.dart' as rust_error;
-import 'package:mangayomi/src/rust/api/rhttp/http.dart' as rust;
-import 'package:mangayomi/src/rust/lib.dart' as rust_lib;
+import 'package:windyomi/services/http/rhttp/src/model/exception.dart';
+import 'package:windyomi/services/http/rhttp/src/model/request.dart';
+import 'package:windyomi/services/http/rhttp/src/model/response.dart';
+import 'package:windyomi/services/http/rhttp/src/model/settings.dart';
+import 'package:windyomi/src/rust/api/rhttp/error.dart' as rust_error;
+import 'package:windyomi/src/rust/api/rhttp/http.dart' as rust;
+import 'package:windyomi/src/rust/lib.dart' as rust_lib;
 
 /// Non-Generated helper function that is used by
 /// the client and also by the static class.

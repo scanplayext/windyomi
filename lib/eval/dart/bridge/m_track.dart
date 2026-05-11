@@ -1,5 +1,5 @@
 import 'package:d4rt/d4rt.dart';
-import 'package:mangayomi/models/video.dart';
+import 'package:windyomi/models/video.dart';
 
 class MTrackBridge {
   final mTrackBridgedClass = BridgedClass(
@@ -27,7 +27,7 @@ class MTrackBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mTrackBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

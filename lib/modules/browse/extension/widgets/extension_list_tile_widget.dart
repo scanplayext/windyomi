@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/changed.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/more/settings/sync/providers/sync_providers.dart';
-import 'package:mangayomi/services/fetch_item_sources.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/services/fetch_sources_list.dart';
-import 'package:mangayomi/utils/cached_network.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/language.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/changed.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/more/settings/sync/providers/sync_providers.dart';
+import 'package:windyomi/services/fetch_item_sources.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/services/fetch_sources_list.dart';
+import 'package:windyomi/utils/cached_network.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/language.dart';
 
 final extensionListTileWidget = Provider.family<Widget, Source>((ref, source) {
   return ExtensionListTileWidget(source: source);

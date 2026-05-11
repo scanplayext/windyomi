@@ -1,5 +1,5 @@
 import 'package:d4rt/d4rt.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
 
 // EditTextPreference
 class SourcePreferenceBridge {
@@ -154,23 +154,23 @@ class SourcePreferenceBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       checkBoxPreferenceBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       switchPreferenceCompatBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       listPreferenceBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       multiSelectListPreferenceBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       editTextPreferenceBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

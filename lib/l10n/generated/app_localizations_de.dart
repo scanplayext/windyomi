@@ -2072,10 +2072,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get auth_unlock_msg =>
-      'Authentifizieren Sie sich, um Mangayomi freizuschalten';
+      'Authentifizieren Sie sich, um Windyomi freizuschalten';
 
   @override
-  String get app_locked => 'Mangayomi ist gesperrt';
+  String get app_locked => 'Windyomi ist gesperrt';
 
   @override
   String get auth_to_continue => 'Authentifizieren Sie sich, um fortzufahren';

@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
-import 'package:mangayomi/services/http/rhttp/rhttp.dart';
-import 'package:mangayomi/src/rust/api/rhttp/http.dart' as rust;
+import 'package:windyomi/services/http/rhttp/rhttp.dart';
+import 'package:windyomi/src/rust/api/rhttp/http.dart' as rust;
 
 /// An HTTP client that is compatible with the `http` package.
 /// This minimizes the changes needed to switch from `http` to `rhttp`

@@ -2079,10 +2079,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get tracked => 'Monitorato';
 
   @override
-  String get auth_unlock_msg => 'Autenticati per sbloccare Mangayomi';
+  String get auth_unlock_msg => 'Autenticati per sbloccare Windyomi';
 
   @override
-  String get app_locked => 'Mangayomi è bloccato';
+  String get app_locked => 'Windyomi è bloccato';
 
   @override
   String get auth_to_continue => 'Autenticati per continuare';

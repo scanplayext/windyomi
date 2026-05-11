@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/more/providers/downloaded_only_state_provider.dart';
-import 'package:mangayomi/modules/more/widgets/list_tile_widget.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/modules/more/providers/downloaded_only_state_provider.dart';
+import 'package:windyomi/modules/more/widgets/list_tile_widget.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class DownloadedOnlyWidget extends ConsumerWidget {
   const DownloadedOnlyWidget({super.key});

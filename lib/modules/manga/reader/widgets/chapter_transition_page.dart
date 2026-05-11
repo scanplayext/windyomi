@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class ChapterTransitionPage extends StatelessWidget {
   final Chapter currentChapter;

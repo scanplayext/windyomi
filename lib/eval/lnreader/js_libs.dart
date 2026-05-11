@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
-import 'package:mangayomi/utils/log/log.dart';
+import 'package:windyomi/utils/log/log.dart';
 
 class JsLibs {
   late JavascriptRuntime runtime;

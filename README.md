@@ -1,105 +1,73 @@
-<p align="center">
- <img width=200px height=200px src="assets/app_icons/icon-red.png"/>
-</p>
+# Windyomi
 
-<h1 align="center"> Mangayomi </h1>
+Windyomi is a personal fork of [Mangayomi](https://github.com/kodjodevf/mangayomi), rebranded as a Flutter app for reading manga, novels, comics and watching anime across mobile and desktop platforms.
 
-<div align="center">
+This fork keeps the Mangayomi architecture and extension compatibility, while using its own package name, bundle identifiers, app display name, release links and update metadata.
 
- [![GitHub downloads](https://img.shields.io/github/downloads/kodjodevf/mangayomi/total?label=downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/kodjodevf/mangayomi/releases)
-![star](https://img.shields.io/github/stars/kodjodevf/mangayomi)
- [![Discord server](https://img.shields.io/discord/1157628512077893666.svg?label=&labelColor=6A7EC2&color=7389D8&logo=discord&logoColor=FFFFFF)](https://discord.com/invite/EjfBuYahsP) 
+## Repository
 
-
-Mangayomi is an open-source Flutter app for reading manga, novels, and watching animes across multiple platforms.
-</div>
+- App name: Windyomi
+- Dart package: `windyomi`
+- Android/iOS bundle identifier: `com.scanplayext.windyomi`
+- URL scheme for Windyomi links: `windyomi://`
+- Compatibility URL scheme for tracker OAuth: `mangayomi://`
+- GitHub repository: `https://github.com/scanplayext/windyomi`
 
 ## Features
 
-<div align="left">
+- Manga, manhwa, manhua, comics and novel reading
+- Anime/video playback support
+- Local library and downloads
+- Extension support from the Mangayomi ecosystem
+- Tracker support for MyAnimeList, AniList, SIMKL, Trakt and Kitsu
+- Backups, categories, themes and reader/player settings
+- Android, iOS, macOS, Windows and Linux build targets
 
-Features include:
-* Reading manga, webtoons, comics, novels, animes, movies, and more.
-* Local reading of content.
-* A configurable reader with multiple viewers, reading directions and other settings.
-* Tracker support for anime and manga: [MyAnimeList](https://myanimelist.net/), [AniList](https://anilist.co/), [SIMKL](https://simkl.com/), [trakt](https://app.trakt.tv/) and [Kitsu](https://kitsu.io/) support.
-* Categories to organize your library.
-* Light and dark themes.
-* Create backups locally to read offline or to your desired cloud service.
+## Building
 
-</div>
-
-## Download
-Get the app from our [releases page](https://github.com/kodjodevf/mangayomi/releases).
-
-## iOS Sideloading Sources
-<a href="https://intradeus.github.io/http-protocol-redirector?r=altstore://source?url=https://raw.githubusercontent.com/kodjodevf/mangayomi/refs/heads/main/repo/source.json"><img alt="AltStore Source" src="repo/images/buttons/altstore_button.png" width="150"></a>
-&nbsp;
-<a href="https://intradeus.github.io/http-protocol-redirector?r=feather://source/https://raw.githubusercontent.com/kodjodevf/mangayomi/refs/heads/main/repo/source.json"><img alt="Feather Source" src="repo/images/buttons/feather_button.png" width="150"></a>
-&nbsp;
-<a href="https://intradeus.github.io/http-protocol-redirector?r=sidestore://source?url=https://raw.githubusercontent.com/kodjodevf/mangayomi/refs/heads/main/repo/source.json"><img alt="Sidestore Source" src="repo/images/buttons/sidestore_button.png" width="150"></a>
-&nbsp;
-<a href="https://raw.githubusercontent.com/kodjodevf/mangayomi/refs/heads/main/repo/source.json"><img alt="Direct URL Source" src="repo/images/buttons/url_button.png" width="150"></a>
-
-Note: Only future releases (> 0.5.2) will be signed (and therefore have AltStore/SideStore compatibility).
-
-# Contributing
-
-Contributions are welcome!
-
-To get started with extension development, see [CONTRIBUTING-DART.md](https://github.com/kodjodevf/mangayomi-extensions/blob/main/CONTRIBUTING-DART.md) for create sources in Dart or [CONTRIBUTING-JS.md](https://github.com/kodjodevf/mangayomi-extensions/blob/main/CONTRIBUTING-JS.md) for create sources in JavaScript.
-
-## Using flutter_rust_bridge
-
-To run and build this app, you need to have
-[Flutter SDK](https://docs.flutter.dev/get-started/install)
-and [Rust toolchain](https://www.rust-lang.org/tools/install)
-installed on your system.
-You can check that your system is ready with the commands below.
-Note that all the Flutter subcomponents should be installed.
+Install Flutter and Rust first:
 
 ```bash
-rustc --version
 flutter doctor
+rustc --version
 ```
 
-You also need to have the CLI tool for flutter_rust_bridge ready.
+Install the Flutter Rust Bridge generator:
 
 ```bash
-cargo install 'flutter_rust_bridge_codegen'
+cargo install flutter_rust_bridge_codegen
 ```
 
-run the following command:
+Fetch dependencies:
 
 ```bash
-flutter_rust_bridge_codegen generate
+flutter pub get
 ```
 
-Now you can run and build this app just like any other Flutter projects.
+Run on the current platform:
 
 ```bash
 flutter run
 ```
 
+To build iOS you need macOS, Xcode and an Apple signing profile:
 
+```bash
+flutter build ipa --release
+```
+
+## Releases
+
+GitHub Actions is configured to publish Windyomi artifacts under this repository. The iOS sideloading source at `repo/source.json` is intentionally minimal until the first Windyomi release exists; the source updater workflow will populate release URLs after publishing.
+
+## Attribution
+
+Windyomi is based on Mangayomi by Moustapha Kodjo Amadou and contributors. The original project is licensed under the Apache License 2.0. This fork keeps the original license and copyright notice.
 
 ## License
 
-    Copyright 2023 Moustapha Kodjo Amadou
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-    
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
-Mangayomi is not hosting any kind of content and the developer(s) of this application does not have any affiliation with the content providers that are freely available in the internet.
+Windyomi does not host content and is not affiliated with third-party content providers or extension sources.

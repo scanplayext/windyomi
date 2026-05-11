@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/services/get_source_preference.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/services/get_source_preference.dart';
 
 void setPreferenceSetting(SourcePreference sourcePreference, Source source) {
   final sourcePref = isar.sourcePreferences

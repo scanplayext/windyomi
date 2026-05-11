@@ -5,13 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show ProviderListenable;
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/manga/reader/widgets/custom_value_indicator_shape.dart';
-import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/reader/reader_screen.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/global_style.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/manga/reader/widgets/custom_value_indicator_shape.dart';
+import 'package:windyomi/modules/more/settings/reader/providers/reader_state_provider.dart';
+import 'package:windyomi/modules/more/settings/reader/reader_screen.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/global_style.dart';
 
 /// The bottom bar for the manga reader.
 ///

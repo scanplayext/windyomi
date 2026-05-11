@@ -1,6 +1,6 @@
 import 'dart:typed_data';
-import 'package:mangayomi/services/http/rhttp/src/model/request.dart';
-import 'package:mangayomi/src/rust/api/rhttp/http.dart' as rust;
+import 'package:windyomi/services/http/rhttp/src/model/request.dart';
+import 'package:windyomi/src/rust/api/rhttp/http.dart' as rust;
 
 sealed class HttpResponse {
   final HttpRequest request;

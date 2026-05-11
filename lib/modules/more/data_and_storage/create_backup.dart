@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/manga/detail/widgets/chapter_filter_list_tile_widget.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/auto_backup.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/backup.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/modules/manga/detail/widgets/chapter_filter_list_tile_widget.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/auto_backup.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/backup.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class CreateBackup extends ConsumerStatefulWidget {

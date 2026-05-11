@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 class CreateExtension extends StatefulWidget {
   const CreateExtension({super.key});
@@ -297,7 +297,7 @@ Widget _textEditing(
 }
 
 const _dartTemplate = r'''
-import 'package:mangayomi/bridge_lib.dart';
+import 'package:windyomi/bridge_lib.dart';
 import 'dart:convert';
 
 class TestSource extends MProvider {

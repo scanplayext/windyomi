@@ -1,6 +1,6 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/utils/constant.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/utils/constant.dart';
 part 'settings.g.dart';
 
 @collection

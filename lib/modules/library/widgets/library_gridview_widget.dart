@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/library/providers/library_state_provider.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/library/widgets/continue_reader_button.dart';
-import 'package:mangayomi/modules/manga/detail/providers/state_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/modules/library/widgets/library_entry_utils.dart';
-import 'package:mangayomi/modules/widgets/bottom_text_widget.dart';
-import 'package:mangayomi/modules/widgets/cover_view_widget.dart';
-import 'package:mangayomi/modules/widgets/gridview_widget.dart';
+import 'package:windyomi/modules/library/providers/library_state_provider.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/library/widgets/continue_reader_button.dart';
+import 'package:windyomi/modules/manga/detail/providers/state_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/modules/library/widgets/library_entry_utils.dart';
+import 'package:windyomi/modules/widgets/bottom_text_widget.dart';
+import 'package:windyomi/modules/widgets/cover_view_widget.dart';
+import 'package:windyomi/modules/widgets/gridview_widget.dart';
 
 class LibraryGridViewWidget extends StatefulWidget {
   final bool isCoverOnlyGrid;

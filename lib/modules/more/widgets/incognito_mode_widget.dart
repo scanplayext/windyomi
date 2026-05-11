@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/modules/more/providers/incognito_mode_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/general/providers/general_state_provider.dart';
-import 'package:mangayomi/modules/more/widgets/list_tile_widget.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/modules/more/providers/incognito_mode_state_provider.dart';
+import 'package:windyomi/modules/more/settings/general/providers/general_state_provider.dart';
+import 'package:windyomi/modules/more/widgets/list_tile_widget.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class IncognitoModeWidget extends ConsumerWidget {
   const IncognitoModeWidget({super.key});

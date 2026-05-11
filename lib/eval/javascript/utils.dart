@@ -4,16 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:http/http.dart' as http;
-import 'package:mangayomi/src/rust/api/epub.dart';
+import 'package:windyomi/src/rust/api/epub.dart';
 import 'package:path/path.dart' as p;
 import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:js_packer/js_packer.dart';
-import 'package:mangayomi/eval/javascript/http.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/utils/cryptoaes/js_unpacker.dart';
-import 'package:mangayomi/utils/log/log.dart';
+import 'package:windyomi/eval/javascript/http.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/utils/cryptoaes/js_unpacker.dart';
+import 'package:windyomi/utils/log/log.dart';
 
 class JsUtils {
   late JavascriptRuntime runtime;

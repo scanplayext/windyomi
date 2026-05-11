@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
-import 'package:mangayomi/utils/chapter_recognition.dart';
-import 'package:mangayomi/modules/manga/reader/mixins/chapter_reader_settings_mixin.dart';
-import 'package:mangayomi/modules/manga/reader/mixins/chapter_controller_mixin.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/providers/incognito_mode_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/downloads/providers/downloads_state_provider.dart';
-import 'package:mangayomi/utils/extensions/chapter_extensions.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/modules/more/settings/reader/providers/reader_state_provider.dart';
+import 'package:windyomi/utils/chapter_recognition.dart';
+import 'package:windyomi/modules/manga/reader/mixins/chapter_reader_settings_mixin.dart';
+import 'package:windyomi/modules/manga/reader/mixins/chapter_controller_mixin.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/providers/incognito_mode_state_provider.dart';
+import 'package:windyomi/modules/more/settings/downloads/providers/downloads_state_provider.dart';
+import 'package:windyomi/utils/extensions/chapter_extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'reader_controller_provider.g.dart';
 

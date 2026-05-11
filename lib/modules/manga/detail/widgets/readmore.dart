@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/modules/manga/detail/widgets/expandable_text.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/modules/manga/detail/widgets/expandable_text.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class ReadMoreWidget extends StatefulWidget {
   const ReadMoreWidget({

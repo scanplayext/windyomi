@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/l10n/generated/app_localizations.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
-import 'package:mangayomi/modules/more/statistics/statistics_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/item_type_filters.dart';
-import 'package:mangayomi/utils/item_type_localization.dart';
+import 'package:windyomi/l10n/generated/app_localizations.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/more/settings/reader/providers/reader_state_provider.dart';
+import 'package:windyomi/modules/more/statistics/statistics_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/item_type_filters.dart';
+import 'package:windyomi/utils/item_type_localization.dart';
 
 class StatisticsScreen extends ConsumerStatefulWidget {
   const StatisticsScreen({super.key});

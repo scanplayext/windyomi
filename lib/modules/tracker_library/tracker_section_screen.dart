@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/track_search.dart';
-import 'package:mangayomi/modules/tracker_library/tracker_library_card.dart';
-import 'package:mangayomi/modules/tracker_library/tracker_library_section.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/track_search.dart';
+import 'package:windyomi/modules/tracker_library/tracker_library_card.dart';
+import 'package:windyomi/modules/tracker_library/tracker_library_section.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class TrackerSectionScreen extends StatefulWidget {

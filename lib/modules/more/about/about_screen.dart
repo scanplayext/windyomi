@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/about/providers/check_for_update.dart';
-import 'package:mangayomi/modules/more/about/providers/download_file_screen.dart';
-import 'package:mangayomi/modules/more/about/providers/get_package_info.dart';
-import 'package:mangayomi/modules/more/about/providers/logs_state.dart';
-import 'package:mangayomi/modules/widgets/progress_center.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/utils/log/logger.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/about/providers/check_for_update.dart';
+import 'package:windyomi/modules/more/about/providers/download_file_screen.dart';
+import 'package:windyomi/modules/more/about/providers/get_package_info.dart';
+import 'package:windyomi/modules/more/about/providers/logs_state.dart';
+import 'package:windyomi/modules/widgets/progress_center.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/utils/log/logger.dart';
 import 'package:path/path.dart' as path;
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -176,7 +176,7 @@ class AboutScreen extends ConsumerWidget {
                             onPressed: () {
                               _launchInBrowser(
                                 Uri.parse(
-                                  'https://github.com/kodjodevf/mangayomi',
+                                  'https://github.com/scanplayext/windyomi',
                                 ),
                               );
                             },

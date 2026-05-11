@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mangayomi/modules/calendar/widgets/calendar_indicator.dart';
+import 'package:windyomi/modules/calendar/widgets/calendar_indicator.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 const _maxEventDots = 3;

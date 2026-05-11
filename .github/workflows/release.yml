@@ -67,20 +67,20 @@ jobs:
           export GRADLE_OPTS="-Xmx4096m -XX:MaxMetaspaceSize=512m -XX:+UseG1GC"
           flutter build apk --release --split-per-abi --verbose
           cd build/app/outputs/flutter-apk
-          mv app-arm64-v8a-release.apk Mangayomi-${{ github.ref_name }}-android-arm64-v8a.apk
-          mv app-armeabi-v7a-release.apk Mangayomi-${{ github.ref_name }}-android-armeabi-v7a.apk
-          mv app-x86_64-release.apk Mangayomi-${{ github.ref_name }}-android-x86_64.apk
+          mv app-arm64-v8a-release.apk Windyomi-${{ github.ref_name }}-android-arm64-v8a.apk
+          mv app-armeabi-v7a-release.apk Windyomi-${{ github.ref_name }}-android-armeabi-v7a.apk
+          mv app-x86_64-release.apk Windyomi-${{ github.ref_name }}-android-x86_64.apk
 
       - name: upload artifact android apks
         uses: actions/upload-artifact@v4
         with:
-          name: Mangayomi-${{ github.ref_name }}-android
-          path: "build/app/outputs/flutter-apk/Mangayomi-*.apk"
+          name: Windyomi-${{ github.ref_name }}-android
+          path: "build/app/outputs/flutter-apk/Windyomi-*.apk"
 
       - name: release packages android apks
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/Mangayomi-*.apk"
+          artifacts: "build/app/outputs/flutter-apk/Windyomi-*.apk"
           allowUpdates: true
 
   build-and-release-ios-ipa:
@@ -140,18 +140,18 @@ jobs:
           mv build/ios/iphoneos/Runner.app build/ios/iphoneos/Payload/
           ./zsign -f -k ./certificate.p12 -p "$P12_PASSWORD" -m ./profile.mobileprovision ./build/ios/iphoneos/Payload/Runner.app
           cd build/ios/iphoneos
-          zip -r Mangayomi-${{ github.ref_name }}-ios.ipa Payload
+          zip -r Windyomi-${{ github.ref_name }}-ios.ipa Payload
 
       - name: Upload artifact iOS IPA
         uses: actions/upload-artifact@v4
         with:
-          name: Mangayomi-${{ github.ref_name }}-ios
-          path: "build/ios/iphoneos/Mangayomi-*.ipa"
+          name: Windyomi-${{ github.ref_name }}-ios
+          path: "build/ios/iphoneos/Windyomi-*.ipa"
 
       - name: Release package iOS IPA
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/ios/iphoneos/Mangayomi-*.ipa"
+          artifacts: "build/ios/iphoneos/Windyomi-*.ipa"
           allowUpdates: true
 
   build-and-release-macos-dmg:
@@ -183,18 +183,18 @@ jobs:
           cd ..
           flutter build macos --release --verbose
           brew install create-dmg
-          create-dmg --volname Mangayomi-${{ github.ref_name }}-macos --window-pos 200 120 --window-size 800 450 --icon-size 100 --app-drop-link 600 185 Mangayomi-${{ github.ref_name }}-macos.dmg build/macos/Build/Products/Release/Mangayomi.app
+          create-dmg --volname Windyomi-${{ github.ref_name }}-macos --window-pos 200 120 --window-size 800 450 --icon-size 100 --app-drop-link 600 185 Windyomi-${{ github.ref_name }}-macos.dmg build/macos/Build/Products/Release/Windyomi.app
 
       - name: upload artifact macos dmg
         uses: actions/upload-artifact@v4
         with:
-          name: Mangayomi-${{ github.ref_name }}-macos
-          path: "/Users/runner/work/mangayomi/mangayomi/*.dmg"
+          name: Windyomi-${{ github.ref_name }}-macos
+          path: "${{ github.workspace }}/*.dmg"
 
       - name: release package macos dmg
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "/Users/runner/work/mangayomi/mangayomi/*.dmg"
+          artifacts: "${{ github.workspace }}/*.dmg"
           allowUpdates: true
 
   build-and-release-windows-exe_zip:
@@ -230,31 +230,31 @@ jobs:
         run: |
           # Rename the installer .exe
           $installer = Get-ChildItem "build/windows/x64/installer/Release/*-Installer.exe"
-          Rename-Item -Path $installer.FullName -NewName "Mangayomi-${{ github.ref_name }}-windows.exe"
+          Rename-Item -Path $installer.FullName -NewName "Windyomi-${{ github.ref_name }}-windows.exe"
 
           # Go to runner output dir
           Set-Location -Path "build/windows/x64/runner/Release"
 
           # Create zip
-          Compress-Archive -Path * -DestinationPath "Mangayomi-Windows.zip"
+          Compress-Archive -Path * -DestinationPath "Windyomi-Windows.zip"
 
           # Rename zip
-          Rename-Item -Path "Mangayomi-Windows.zip" -NewName "Mangayomi-${{ github.ref_name }}-windows.zip"
+          Rename-Item -Path "Windyomi-Windows.zip" -NewName "Windyomi-${{ github.ref_name }}-windows.zip"
 
       - name: upload artifact windows exe_zip
         uses: actions/upload-artifact@v4
         with:
-          name: Mangayomi-${{ github.ref_name }}-windows-zip
+          name: Windyomi-${{ github.ref_name }}-windows-zip
           path: |
-            build/windows/x64/installer/Release/Mangayomi-*.exe
-            build/windows/x64/runner/Release/Mangayomi-*.zip
+            build/windows/x64/installer/Release/Windyomi-*.exe
+            build/windows/x64/runner/Release/Windyomi-*.zip
 
       - name: release package windows exe_zip
         uses: ncipollo/release-action@v1
         with:
           artifacts: |
-            build/windows/x64/installer/Release/Mangayomi-*.exe
-            build/windows/x64/runner/Release/Mangayomi-*.zip
+            build/windows/x64/installer/Release/Windyomi-*.exe
+            build/windows/x64/runner/Release/Windyomi-*.zip
           allowUpdates: true
 
   build-and-release-linux-zip_AppImage_RPM:
@@ -293,13 +293,13 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: "zip"
-          filename: Mangayomi-${{ github.ref_name }}-linux.zip
+          filename: Windyomi-${{ github.ref_name }}-linux.zip
           directory: build/linux/x64/release/bundle
 
       - name: Create AppImage
         run: |
           # Move Zip-file outside the bundle dir to avoid including it in the AppImage
-          mv build/linux/x64/release/bundle/Mangayomi-*.zip build/linux/x64/release/
+          mv build/linux/x64/release/bundle/Windyomi-*.zip build/linux/x64/release/
           # Create fresh AppDir structure
           rm -rf AppDir
           mkdir -p AppDir/usr/bin
@@ -319,7 +319,7 @@ jobs:
             EXCLUDE_ARGS+=" --exclude-library $lib"
           done
           # Copy desktop file to AppDir root
-          cp linux/mangayomi.desktop AppDir/mangayomi.desktop
+          cp linux/windyomi.desktop AppDir/windyomi.desktop
           # Create AppRun file
           cat <<EOF > AppDir/AppRun
           #!/bin/sh
@@ -327,40 +327,40 @@ jobs:
           HERE=\${SELF%/*}
           export PATH="\${HERE}/usr/bin/:\${PATH}"
           export LD_LIBRARY_PATH="\${HERE}/usr/bin/lib/:\${HERE}/usr/lib/:\${LD_LIBRARY_PATH}"
-          exec "\${HERE}/usr/bin/mangayomi" "\$@"
+          exec "\${HERE}/usr/bin/windyomi" "\$@"
           EOF
           chmod +x AppDir/AppRun
           # Make AppImage
           /usr/local/bin/linuxdeploy \
             --appdir AppDir \
-            --desktop-file AppDir/mangayomi.desktop \
-            --icon-file AppDir/usr/share/icons/hicolor/512x512/apps/mangayomi.png \
-            --executable AppDir/usr/bin/mangayomi \
+            --desktop-file AppDir/windyomi.desktop \
+            --icon-file AppDir/usr/share/icons/hicolor/512x512/apps/windyomi.png \
+            --executable AppDir/usr/bin/windyomi \
             $EXCLUDE_ARGS \
             --output appimage
-          mv $(find . -type f -name "*.AppImage") build/linux/x64/release/Mangayomi-${{ github.ref_name }}-linux.AppImage
+          mv $(find . -type f -name "*.AppImage") build/linux/x64/release/Windyomi-${{ github.ref_name }}-linux.AppImage
 
       - name: Create RPM Package
         run: |
           VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //; s/+.*//')
           mkdir -p rpm_build/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
-          cp -r build/linux/x64/release/bundle rpm_build/SOURCES/mangayomi-${VERSION}
-          tar czf rpm_build/SOURCES/mangayomi-${VERSION}.tar.gz -C rpm_build/SOURCES mangayomi-${VERSION}
+          cp -r build/linux/x64/release/bundle rpm_build/SOURCES/windyomi-${VERSION}
+          tar czf rpm_build/SOURCES/windyomi-${VERSION}.tar.gz -C rpm_build/SOURCES windyomi-${VERSION}
           mkdir -p rpm_build/SOURCES/usr/share/icons
           cp -rL linux/packaging/icons/* rpm_build/SOURCES/usr/share/icons
-          cp linux/mangayomi.desktop rpm_build/SOURCES/
+          cp linux/windyomi.desktop rpm_build/SOURCES/
           # RPM Spec File
-          cat <<EOF > rpm_build/SPECS/mangayomi.spec
-          Name: mangayomi
+          cat <<EOF > rpm_build/SPECS/windyomi.spec
+          Name: windyomi
           Version: ${VERSION}
           Release: 1%{?dist}
-          Summary: Mangayomi is an open-source Flutter app for reading manga, novels, and watching animes across multiple platforms
-          License: MIT
+          Summary: Windyomi is an open-source Flutter app for reading manga, novels, and watching animes across multiple platforms
+          License: Apache-2.0
           Source0: %{name}-%{version}.tar.gz
           BuildArch: x86_64
 
           %description
-          Mangayomi is an open-source Flutter app for reading manga, novels, and watching animes across multiple platforms.
+          Windyomi is an open-source Flutter app for reading manga, novels, and watching animes across multiple platforms.
 
           %prep
           %setup -q
@@ -371,37 +371,37 @@ jobs:
           mkdir -p %{buildroot}/usr/share/icons/hicolor/256x256/apps
           cp -r * %{buildroot}/usr/bin/
           cp -r %{_sourcedir}/usr/share/* %{buildroot}/usr/share/
-          cp %{_sourcedir}/mangayomi.desktop %{buildroot}/usr/share/applications/mangayomi.desktop
+          cp %{_sourcedir}/windyomi.desktop %{buildroot}/usr/share/applications/windyomi.desktop
 
           %files
           /usr/bin/*
-          /usr/share/applications/mangayomi.desktop
-          /usr/share/icons/hicolor/16x16/apps/mangayomi.png
-          /usr/share/icons/hicolor/32x32/apps/mangayomi.png
-          /usr/share/icons/hicolor/64x64/apps/mangayomi.png
-          /usr/share/icons/hicolor/128x128/apps/mangayomi.png
-          /usr/share/icons/hicolor/256x256/apps/mangayomi.png
-          /usr/share/icons/hicolor/512x512/apps/mangayomi.png
+          /usr/share/applications/windyomi.desktop
+          /usr/share/icons/hicolor/16x16/apps/windyomi.png
+          /usr/share/icons/hicolor/32x32/apps/windyomi.png
+          /usr/share/icons/hicolor/64x64/apps/windyomi.png
+          /usr/share/icons/hicolor/128x128/apps/windyomi.png
+          /usr/share/icons/hicolor/256x256/apps/windyomi.png
+          /usr/share/icons/hicolor/512x512/apps/windyomi.png
           EOF
 
-          rpmbuild --define "_topdir $(pwd)/rpm_build" -ba rpm_build/SPECS/mangayomi.spec
-          mv rpm_build/RPMS/x86_64/*.rpm build/linux/x64/release/Mangayomi-${{ github.ref_name }}-linux.rpm
+          rpmbuild --define "_topdir $(pwd)/rpm_build" -ba rpm_build/SPECS/windyomi.spec
+          mv rpm_build/RPMS/x86_64/*.rpm build/linux/x64/release/Windyomi-${{ github.ref_name }}-linux.rpm
 
       - name: upload artifact linux zip
         uses: actions/upload-artifact@v4
         with:
-          name: Mangayomi-${{ github.ref_name }}-linux-zip
+          name: Windyomi-${{ github.ref_name }}-linux-zip
           path: |
-            build/linux/x64/release/Mangayomi-*.zip
-            build/linux/x64/release/Mangayomi-*.AppImage
-            build/linux/x64/release/Mangayomi-*.rpm
+            build/linux/x64/release/Windyomi-*.zip
+            build/linux/x64/release/Windyomi-*.AppImage
+            build/linux/x64/release/Windyomi-*.rpm
       - name: release packages linux zip
         uses: ncipollo/release-action@v1
         with:
           artifacts: |
-            build/linux/x64/release/Mangayomi-*.zip
-            build/linux/x64/release/Mangayomi-*.AppImage
-            build/linux/x64/release/Mangayomi-*.rpm
+            build/linux/x64/release/Windyomi-*.zip
+            build/linux/x64/release/Windyomi-*.AppImage
+            build/linux/x64/release/Windyomi-*.rpm
           allowUpdates: true
 
   build-and-release-linux-deb:
@@ -445,24 +445,24 @@ jobs:
           mkdir extracted_deb
           dpkg-deb -R "$(find dist -name '*.deb' | head -n 1)" extracted_deb
           # Replace desktop file
-          cp -f linux/mangayomi.desktop extracted_deb/usr/share/applications/mangayomi.desktop
+          cp -f linux/windyomi.desktop extracted_deb/usr/share/applications/windyomi.desktop
           # copy all icon sizes
           cp -rLf linux/packaging/icons/* extracted_deb/usr/share/icons
           # Set correct permissions
-          chmod 644 extracted_deb/usr/share/applications/mangayomi.desktop
+          chmod 644 extracted_deb/usr/share/applications/windyomi.desktop
           # Repack the .deb
-          fakeroot dpkg-deb -b extracted_deb dist/Mangayomi-${{ github.ref_name }}-linux.deb
+          fakeroot dpkg-deb -b extracted_deb dist/Windyomi-${{ github.ref_name }}-linux.deb
 
       - name: upload artifact linux deb
         uses: actions/upload-artifact@v4
         with:
-          name: Mangayomi-${{ github.ref_name }}-linux-deb
-          path: dist/Mangayomi-*.deb
+          name: Windyomi-${{ github.ref_name }}-linux-deb
+          path: dist/Windyomi-*.deb
 
       - name: Release package deb
         uses: ncipollo/release-action@v1
         with:
-          artifacts: dist/Mangayomi-*.deb
+          artifacts: dist/Windyomi-*.deb
           allowUpdates: true
 
   ios-source-build:

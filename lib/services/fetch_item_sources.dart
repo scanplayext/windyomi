@@ -1,7 +1,7 @@
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/services/fetch_sources_list.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/services/fetch_sources_list.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'fetch_item_sources.g.dart';
 

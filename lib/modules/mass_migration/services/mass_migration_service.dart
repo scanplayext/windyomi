@@ -1,20 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/changed.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/history.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/update.dart';
-import 'package:mangayomi/modules/mass_migration/models/mass_migration_models.dart';
-import 'package:mangayomi/modules/manga/detail/providers/isar_providers.dart';
-import 'package:mangayomi/modules/more/settings/sync/providers/sync_providers.dart';
-import 'package:mangayomi/services/get_detail.dart';
-import 'package:mangayomi/services/search.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/changed.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/history.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/update.dart';
+import 'package:windyomi/modules/mass_migration/models/mass_migration_models.dart';
+import 'package:windyomi/modules/manga/detail/providers/isar_providers.dart';
+import 'package:windyomi/modules/more/settings/sync/providers/sync_providers.dart';
+import 'package:windyomi/services/get_detail.dart';
+import 'package:windyomi/services/search.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
 
 Future<void> migrateLibraryItem({
   required WidgetRef ref,

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/modules/more/settings/sync/providers/sync_providers.dart';
-import 'package:mangayomi/utils/date.dart';
-import 'package:mangayomi/models/sync_preference.dart';
-import 'package:mangayomi/modules/more/settings/sync/widgets/sync_listile.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/services/sync_server.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/log/logger.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/modules/more/settings/sync/providers/sync_providers.dart';
+import 'package:windyomi/utils/date.dart';
+import 'package:windyomi/models/sync_preference.dart';
+import 'package:windyomi/modules/more/settings/sync/widgets/sync_listile.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/services/sync_server.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/log/logger.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -1,10 +1,10 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/download.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/utils/chapter_recognition.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/download.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/utils/chapter_recognition.dart';
 
 extension MangaExtensions on Manga {
   // ── For the READER: always ascending story order, filters applied ──────────

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/modules/widgets/custom_sliver_grouped_list_view.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/browse/extension/providers/extensions_provider.dart';
-import 'package:mangayomi/services/fetch_item_sources.dart';
-import 'package:mangayomi/modules/widgets/progress_center.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/services/fetch_sources_list.dart';
-import 'package:mangayomi/utils/language.dart';
-import 'package:mangayomi/modules/browse/extension/widgets/extension_list_tile_widget.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/modules/widgets/custom_sliver_grouped_list_view.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/browse/extension/providers/extensions_provider.dart';
+import 'package:windyomi/services/fetch_item_sources.dart';
+import 'package:windyomi/modules/widgets/progress_center.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/services/fetch_sources_list.dart';
+import 'package:windyomi/utils/language.dart';
+import 'package:windyomi/modules/browse/extension/widgets/extension_list_tile_widget.dart';
 
 class ExtensionScreen extends ConsumerStatefulWidget {
   final ItemType itemType;

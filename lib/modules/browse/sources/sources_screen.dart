@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/browse/browse_screen.dart';
-import 'package:mangayomi/modules/widgets/custom_sliver_grouped_list_view.dart';
+import 'package:windyomi/modules/browse/browse_screen.dart';
+import 'package:windyomi/modules/widgets/custom_sliver_grouped_list_view.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/browse/sources/widgets/source_list_tile.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/language.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/browse/sources/widgets/source_list_tile.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/language.dart';
 
 class SourcesScreen extends ConsumerStatefulWidget {
   final Function(int) tabIndex;

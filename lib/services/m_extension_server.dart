@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:m_extension_server/m_extension_server.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/utils/platform_utils.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/utils/platform_utils.dart';
 
 class MExtensionServerPlatform {
   WidgetRef ref;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/utils/global_style.dart';
+import 'package:windyomi/utils/global_style.dart';
 
 class CustomPopupMenuButton<T> extends StatelessWidget {
   final String label;

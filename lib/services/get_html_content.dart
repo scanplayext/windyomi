@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:mangayomi/src/rust/api/epub.dart';
+import 'package:windyomi/src/rust/api/epub.dart';
 import 'package:path/path.dart' as p;
 import 'package:html/parser.dart';
-import 'package:mangayomi/eval/lib.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/utils/utils.dart';
+import 'package:windyomi/eval/lib.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'get_html_content.g.dart';
 

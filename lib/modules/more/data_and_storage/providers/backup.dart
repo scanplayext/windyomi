@@ -4,21 +4,21 @@ import 'package:archive/archive_io.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/category.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/custom_button.dart';
-import 'package:mangayomi/models/download.dart';
-import 'package:mangayomi/models/history.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/track_preference.dart';
-import 'package:mangayomi/models/update.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/backup_compression.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/category.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/custom_button.dart';
+import 'package:windyomi/models/download.dart';
+import 'package:windyomi/models/history.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/track_preference.dart';
+import 'package:windyomi/models/update.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/backup_compression.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path/path.dart' as p;
@@ -146,7 +146,7 @@ Future<void> doBackUp(
     }
     final regExp = RegExp(r'[^a-zA-Z0-9 .()\-\s]');
     final name =
-        'mangayomi_${DateTime.now().toString().replaceAll(regExp, '_').replaceAll(' ', '_')}';
+        'windyomi_${DateTime.now().toString().replaceAll(regExp, '_').replaceAll(' ', '_')}';
     final backupFilePath = p.join(path, "$name.backup.db");
     final file = File(backupFilePath);
 
@@ -186,7 +186,7 @@ Future<void> doBackUp(
                       ShareParams(
                         files: [XFile(p.join(path, "$name.backup"))],
                         subject: "$name.backup",
-                        title: "Share Mangayomi backup file",
+                        title: "Share Windyomi backup file",
                         sharePositionOrigin: box == null
                             ? null
                             : box.localToGlobal(Offset.zero) & box.size,

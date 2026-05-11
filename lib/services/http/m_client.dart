@@ -2,20 +2,20 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:mangayomi/eval/model/m_source.dart';
-import 'package:mangayomi/main.dart';
+import 'package:windyomi/eval/model/m_source.dart';
+import 'package:windyomi/main.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
     as flutter_inappwebview;
-import 'package:mangayomi/models/settings.dart';
+import 'package:windyomi/models/settings.dart';
 import 'package:http/io_client.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/settings.dart';
-import 'package:mangayomi/utils/log/log.dart';
-import 'package:mangayomi/services/http/rhttp/rhttp.dart' as rhttp;
-import 'package:mangayomi/services/http/doh/doh_resolver.dart';
-import 'package:mangayomi/services/http/doh/doh_providers.dart';
+import 'package:windyomi/services/http/rhttp/src/model/settings.dart';
+import 'package:windyomi/utils/log/log.dart';
+import 'package:windyomi/services/http/rhttp/rhttp.dart' as rhttp;
+import 'package:windyomi/services/http/doh/doh_resolver.dart';
+import 'package:windyomi/services/http/doh/doh_providers.dart';
 
 class MClient {
   MClient();

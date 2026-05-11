@@ -1,4 +1,4 @@
-import 'package:mangayomi/models/manga.dart';
+import 'package:windyomi/models/manga.dart';
 
 List<ItemType> hiddenItemTypes(List<String> hideItems) {
   return [

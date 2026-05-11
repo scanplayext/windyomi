@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/custom_button.dart';
-import 'package:mangayomi/modules/more/settings/player/providers/custom_buttons_provider.dart';
-import 'package:mangayomi/modules/widgets/progress_center.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/custom_button.dart';
+import 'package:windyomi/modules/more/settings/player/providers/custom_buttons_provider.dart';
+import 'package:windyomi/modules/widgets/progress_center.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 class CustomButtonScreen extends ConsumerStatefulWidget {
   const CustomButtonScreen({super.key});

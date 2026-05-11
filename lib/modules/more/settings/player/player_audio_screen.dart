@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/l10n/generated/app_localizations.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/settings/player/custom_button_screen.dart';
-import 'package:mangayomi/modules/more/settings/player/providers/player_audio_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/l10n/generated/app_localizations.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/settings/player/custom_button_screen.dart';
+import 'package:windyomi/modules/more/settings/player/providers/player_audio_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class PlayerAudioScreen extends ConsumerStatefulWidget {

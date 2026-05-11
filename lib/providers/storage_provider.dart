@@ -2,22 +2,22 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/category.dart';
-import 'package:mangayomi/models/changed.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/custom_button.dart';
-import 'package:mangayomi/models/download.dart';
-import 'package:mangayomi/models/update.dart';
-import 'package:mangayomi/models/history.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/models/sync_preference.dart';
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/track_preference.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/category.dart';
+import 'package:windyomi/models/changed.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/custom_button.dart';
+import 'package:windyomi/models/download.dart';
+import 'package:windyomi/models/update.dart';
+import 'package:windyomi/models/history.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/models/sync_preference.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/track_preference.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
@@ -50,14 +50,14 @@ class StorageProvider {
   Future<Directory?> getDefaultDirectory() async {
     Directory? directory;
     if (Platform.isAndroid) {
-      directory = Directory("/storage/emulated/0/Mangayomi/");
+      directory = Directory("/storage/emulated/0/Windyomi/");
     } else {
       final dir = await getApplicationDocumentsDirectory();
-      // The documents dir in iOS is already named "Mangayomi".
-      // Appending "Mangayomi" to the documents dir would create
-      // unnecessarily nested Mangayomi/Mangayomi/ folder.
+      // The documents dir in iOS is already named "Windyomi".
+      // Appending "Windyomi" to the documents dir would create
+      // unnecessarily nested Windyomi/Windyomi/ folder.
       if (Platform.isIOS) return dir;
-      directory = Directory(path.join(dir.path, 'Mangayomi'));
+      directory = Directory(path.join(dir.path, 'Windyomi'));
     }
     return directory;
   }
@@ -130,16 +130,16 @@ class StorageProvider {
     }
     if (Platform.isAndroid) {
       directory = Directory(
-        dPath.isEmpty ? "/storage/emulated/0/Mangayomi/" : "$dPath/",
+        dPath.isEmpty ? "/storage/emulated/0/Windyomi/" : "$dPath/",
       );
     } else {
       final dir = await getApplicationDocumentsDirectory();
       final p = dPath.isEmpty ? dir.path : dPath;
-      // The documents dir in iOS is already named "Mangayomi".
-      // Appending "Mangayomi" to the documents dir would create
-      // unnecessarily nested Mangayomi/Mangayomi/ folder.
+      // The documents dir in iOS is already named "Windyomi".
+      // Appending "Windyomi" to the documents dir would create
+      // unnecessarily nested Windyomi/Windyomi/ folder.
       if (Platform.isIOS) return Directory(p);
-      directory = Directory(path.join(p, 'Mangayomi'));
+      directory = Directory(path.join(p, 'Windyomi'));
     }
     return directory;
   }
@@ -199,7 +199,7 @@ class StorageProvider {
       // So they are not just in the app folders root dir
       dbDir = path.join(dir.path, 'databases');
     } else {
-      dbDir = path.join(dir.path, 'Mangayomi', 'databases');
+      dbDir = path.join(dir.path, 'Windyomi', 'databases');
     }
     if (Platform.isMacOS) {
       await _migrateLegacyMacosDatabase(dbDir);
@@ -217,7 +217,7 @@ class StorageProvider {
     try {
       final docs = await getApplicationDocumentsDirectory();
       final legacyDir = Directory(
-        path.join(docs.path, 'Mangayomi', 'databases'),
+        path.join(docs.path, 'Windyomi', 'databases'),
       );
       if (!await legacyDir.exists()) return;
       final newDir = Directory(newDbDir);
@@ -237,7 +237,7 @@ class StorageProvider {
     } catch (e) {
       // Migration is best-effort. Falling back to a fresh DB is preferable
       // to crashing on launch — the user can manually move the legacy
-      // ~/Documents/Mangayomi/databases/ contents if needed.
+      // ~/Documents/Windyomi/databases/ contents if needed.
       debugPrint('[storage] macOS DB migration skipped: $e');
     }
   }
@@ -245,7 +245,7 @@ class StorageProvider {
   Future<Directory?> getGalleryDirectory() async {
     String gPath;
     if (Platform.isAndroid) {
-      gPath = "/storage/emulated/0/Pictures/Mangayomi/";
+      gPath = "/storage/emulated/0/Pictures/Windyomi/";
     } else {
       gPath = path.join((await getDirectory())!.path, 'Pictures');
     }
@@ -297,7 +297,7 @@ class StorageProvider {
         SourcePreferenceStringValueSchema,
       ],
       directory: dir!.path,
-      name: "mangayomiDb",
+      name: "windyomiDb",
       inspector: inspector,
     );
     try {

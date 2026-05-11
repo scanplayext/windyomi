@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:js_packer/js_packer.dart';
-import 'package:mangayomi/models/video.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
-import 'package:mangayomi/utils/xpath_selector.dart';
+import 'package:windyomi/models/video.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/utils/xpath_selector.dart';
 
 class FilemoonExtractor {
   final InterceptedClient client = MClient.init(

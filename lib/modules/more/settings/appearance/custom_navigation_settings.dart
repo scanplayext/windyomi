@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/more/settings/appearance/appearance_screen.dart';
-import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/modules/more/settings/appearance/appearance_screen.dart';
+import 'package:windyomi/modules/more/settings/reader/providers/reader_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class CustomNavigationSettings extends ConsumerStatefulWidget {
   const CustomNavigationSettings({super.key});

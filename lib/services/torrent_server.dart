@@ -3,14 +3,14 @@ import 'dart:io';
 import 'dart:isolate';
 import 'package:flutter/services.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/video.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
-import 'package:mangayomi/ffi/torrent_server_ffi.dart' as libmtorrentserver_ffi;
-import 'package:mangayomi/utils/platform_utils.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/video.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/ffi/torrent_server_ffi.dart' as libmtorrentserver_ffi;
+import 'package:windyomi/utils/platform_utils.dart';
 
 String _buildQueryString(Map<String, List<String>> parameters) {
   final segments = <String>[];
@@ -136,7 +136,7 @@ class MTorrentServer {
         int port = 0;
         if (isMobile) {
           const channel = MethodChannel(
-            'com.kodjodevf.mangayomi.libmtorrentserver',
+            'com.scanplayext.windyomi.libmtorrentserver',
           );
           port = await channel.invokeMethod('start', {"config": config});
         } else {

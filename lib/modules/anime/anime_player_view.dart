@@ -13,38 +13,38 @@ import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riv;
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/custom_button.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/video.dart' as vid;
-import 'package:mangayomi/modules/anime/providers/anime_player_controller_provider.dart';
-import 'package:mangayomi/modules/anime/widgets/aniskip_countdown_btn.dart';
-import 'package:mangayomi/modules/anime/widgets/desktop.dart';
-import 'package:mangayomi/modules/anime/widgets/play_or_pause_button.dart';
-import 'package:mangayomi/modules/library/providers/local_archive.dart';
-import 'package:mangayomi/modules/manga/reader/widgets/btn_chapter_list_dialog.dart';
-import 'package:mangayomi/modules/anime/widgets/mobile.dart';
-import 'package:mangayomi/modules/anime/widgets/subtitle_view.dart';
-import 'package:mangayomi/modules/anime/widgets/subtitle_setting_widget.dart';
-import 'package:mangayomi/modules/manga/reader/providers/push_router.dart';
-import 'package:mangayomi/modules/more/settings/player/providers/player_audio_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/player/providers/player_decoder_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/player/providers/player_state_provider.dart';
-import 'package:mangayomi/modules/widgets/custom_draggable_tabbar.dart';
-import 'package:mangayomi/modules/widgets/progress_center.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/services/aniskip.dart';
-import 'package:mangayomi/services/fetch_subtitles.dart';
-import 'package:mangayomi/services/get_video_list.dart';
-import 'package:mangayomi/services/torrent_server.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
-import 'package:mangayomi/utils/language.dart';
-import 'package:mangayomi/utils/platform_utils.dart';
-import 'package:mangayomi/utils/system_ui.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/custom_button.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/video.dart' as vid;
+import 'package:windyomi/modules/anime/providers/anime_player_controller_provider.dart';
+import 'package:windyomi/modules/anime/widgets/aniskip_countdown_btn.dart';
+import 'package:windyomi/modules/anime/widgets/desktop.dart';
+import 'package:windyomi/modules/anime/widgets/play_or_pause_button.dart';
+import 'package:windyomi/modules/library/providers/local_archive.dart';
+import 'package:windyomi/modules/manga/reader/widgets/btn_chapter_list_dialog.dart';
+import 'package:windyomi/modules/anime/widgets/mobile.dart';
+import 'package:windyomi/modules/anime/widgets/subtitle_view.dart';
+import 'package:windyomi/modules/anime/widgets/subtitle_setting_widget.dart';
+import 'package:windyomi/modules/manga/reader/providers/push_router.dart';
+import 'package:windyomi/modules/more/settings/player/providers/player_audio_state_provider.dart';
+import 'package:windyomi/modules/more/settings/player/providers/player_decoder_state_provider.dart';
+import 'package:windyomi/modules/more/settings/player/providers/player_state_provider.dart';
+import 'package:windyomi/modules/widgets/custom_draggable_tabbar.dart';
+import 'package:windyomi/modules/widgets/progress_center.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/services/aniskip.dart';
+import 'package:windyomi/services/fetch_subtitles.dart';
+import 'package:windyomi/services/get_video_list.dart';
+import 'package:windyomi/services/torrent_server.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/language.dart';
+import 'package:windyomi/utils/platform_utils.dart';
+import 'package:windyomi/utils/system_ui.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit/generated/libmpv/bindings.dart' as generated;
 import 'package:media_kit_video/media_kit_video.dart';
@@ -239,11 +239,11 @@ class _AnimeStreamPageState extends riv.ConsumerState<AnimeStreamPage>
             generated.mpv_format.MPV_FORMAT_NODE,
         "user-data/aniyomi/launch_int_picker":
             generated.mpv_format.MPV_FORMAT_NODE,
-        "user-data/mangayomi/chapter_titles":
+        "user-data/windyomi/chapter_titles":
             generated.mpv_format.MPV_FORMAT_NODE,
-        "user-data/mangayomi/current_chapter":
+        "user-data/windyomi/current_chapter":
             generated.mpv_format.MPV_FORMAT_INT64,
-        "user-data/mangayomi/selected_shader":
+        "user-data/windyomi/selected_shader":
             generated.mpv_format.MPV_FORMAT_NODE,
       },
       eventHandler: _handleMpvEvents,
@@ -602,7 +602,7 @@ class _AnimeStreamPageState extends riv.ConsumerState<AnimeStreamPage>
         );
         nativePlayer.setProperty("user-data/aniyomi/launch_int_picker", "");
         break;
-      case "mangayomi/chapter_titles":
+      case "windyomi/chapter_titles":
         if (value.ref.format == generated.mpv_format.MPV_FORMAT_STRING) {
           final text = value.ref.u.string.cast<Utf8>().toDartString();
           final data = jsonDecode(text) as List<dynamic>;
@@ -618,7 +618,7 @@ class _AnimeStreamPageState extends riv.ConsumerState<AnimeStreamPage>
               .toList();
         }
         break;
-      case "mangayomi/selected_shader":
+      case "windyomi/selected_shader":
         final text = _readMpvString(value);
         _selectedShader.value = text ?? '';
         break;
@@ -627,7 +627,7 @@ class _AnimeStreamPageState extends riv.ConsumerState<AnimeStreamPage>
 
   Future<void> _handleMpvNumberEvents(String propName, int value) async {
     switch (propName.substring(10)) {
-      case "mangayomi/current_chapter":
+      case "windyomi/current_chapter":
         _currentChapterMark.value = max(value, 0);
         break;
     }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/browse/extension/providers/extension_preferences_providers.dart';
-import 'package:mangayomi/modules/manga/detail/widgets/chapter_filter_list_tile_widget.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/browse/extension/providers/extension_preferences_providers.dart';
+import 'package:windyomi/modules/manga/detail/widgets/chapter_filter_list_tile_widget.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class SourcePreferenceWidget extends StatefulWidget {

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/calendar/models/upcoming_ui_model.dart';
-import 'package:mangayomi/modules/calendar/providers/calendar_provider.dart';
-import 'package:mangayomi/modules/calendar/widgets/upcoming_calendar.dart';
-import 'package:mangayomi/modules/calendar/widgets/upcoming_item.dart'
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/calendar/models/upcoming_ui_model.dart';
+import 'package:windyomi/modules/calendar/providers/calendar_provider.dart';
+import 'package:windyomi/modules/calendar/widgets/upcoming_calendar.dart';
+import 'package:windyomi/modules/calendar/widgets/upcoming_item.dart'
     as widgets;
-import 'package:mangayomi/modules/more/settings/reader/providers/reader_state_provider.dart';
-import 'package:mangayomi/modules/widgets/progress_center.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/date.dart';
-import 'package:mangayomi/utils/fetch_interval.dart';
-import 'package:mangayomi/utils/item_type_filters.dart';
-import 'package:mangayomi/utils/item_type_localization.dart';
+import 'package:windyomi/modules/more/settings/reader/providers/reader_state_provider.dart';
+import 'package:windyomi/modules/widgets/progress_center.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/date.dart';
+import 'package:windyomi/utils/fetch_interval.dart';
+import 'package:windyomi/utils/item_type_filters.dart';
+import 'package:windyomi/utils/item_type_localization.dart';
 
 class CalendarScreen extends ConsumerStatefulWidget {
   final ItemType? itemType;

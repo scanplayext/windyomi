@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/track_search.dart';
-import 'package:mangayomi/modules/tracker_library/tracker_item_card.dart';
-import 'package:mangayomi/modules/widgets/bottom_text_widget.dart';
-import 'package:mangayomi/utils/cached_network.dart';
-import 'package:mangayomi/utils/constant.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/track_search.dart';
+import 'package:windyomi/modules/tracker_library/tracker_item_card.dart';
+import 'package:windyomi/modules/widgets/bottom_text_widget.dart';
+import 'package:windyomi/utils/cached_network.dart';
+import 'package:windyomi/utils/constant.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 class TrackerLibraryImageCard extends StatelessWidget {
   final TrackSearch track;

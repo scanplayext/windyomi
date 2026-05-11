@@ -1,8 +1,8 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/download.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/track.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/download.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/track.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'library_filter_provider.g.dart';
 

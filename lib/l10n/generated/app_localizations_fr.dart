@@ -2080,11 +2080,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tracked => 'Suivi';
 
   @override
-  String get auth_unlock_msg =>
-      'Authentifiez-vous pour déverrouiller Mangayomi';
+  String get auth_unlock_msg => 'Authentifiez-vous pour déverrouiller Windyomi';
 
   @override
-  String get app_locked => 'Mangayomi est verrouillé';
+  String get app_locked => 'Windyomi est verrouillé';
 
   @override
   String get auth_to_continue => 'Authentifiez-vous pour continuer';

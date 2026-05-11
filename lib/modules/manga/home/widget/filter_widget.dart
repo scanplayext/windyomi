@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/eval/model/filter.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/eval/model/filter.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class FilterWidget extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:mangayomi/src/rust/api/rhttp/http.dart' as rust;
-import 'package:mangayomi/src/rust/lib.dart' as rust_lib;
+import 'package:windyomi/src/rust/api/rhttp/http.dart' as rust;
+import 'package:windyomi/src/rust/lib.dart' as rust_lib;
 
 /// A token that can be used to cancel an HTTP request.
 /// This token must be passed to the request method.

@@ -1,5 +1,5 @@
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/track_search.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/track_search.dart';
 
 abstract class BaseTracker {
   Future<bool> checkRefresh();

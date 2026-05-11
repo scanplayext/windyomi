@@ -1,12 +1,12 @@
 import 'package:d4rt/d4rt.dart' hide Logger;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
-import 'package:mangayomi/eval/model/filter.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/eval/model/m_provider.dart';
-import 'package:mangayomi/modules/browse/extension/providers/extension_preferences_providers.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
-import 'package:mangayomi/utils/log/log.dart';
+import 'package:windyomi/eval/model/filter.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/eval/model/m_provider.dart';
+import 'package:windyomi/modules/browse/extension/providers/extension_preferences_providers.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/utils/log/log.dart';
 
 class MProviderBridged {
   final mProviderBridged = BridgedClass(
@@ -57,7 +57,7 @@ class MProviderBridged {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mProviderBridged,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registertopLevelFunction(
       'getPreferenceValue',

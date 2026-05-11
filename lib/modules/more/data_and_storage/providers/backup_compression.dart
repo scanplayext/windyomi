@@ -1,6 +1,6 @@
 import 'package:archive/archive.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'backup_compression.g.dart';

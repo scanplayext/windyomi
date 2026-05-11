@@ -1,6 +1,6 @@
 import 'package:html/dom.dart';
 import 'package:pseudom/pseudom.dart' as pseudom;
-import 'package:mangayomi/utils/reg_exp_matcher.dart';
+import 'package:windyomi/utils/reg_exp_matcher.dart';
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';
 
 void _initPseudoSelector() {

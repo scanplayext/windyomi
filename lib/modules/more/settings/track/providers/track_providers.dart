@@ -1,11 +1,11 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/changed.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/track.dart';
-import 'package:mangayomi/models/track_preference.dart';
-import 'package:mangayomi/modules/more/settings/sync/providers/sync_providers.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/changed.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/track.dart';
+import 'package:windyomi/models/track_preference.dart';
+import 'package:windyomi/modules/more/settings/sync/providers/sync_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'track_providers.g.dart';
 

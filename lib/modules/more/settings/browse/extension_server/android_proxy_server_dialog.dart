@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 void showAndroidProxyServerDialog(
   BuildContext context, {

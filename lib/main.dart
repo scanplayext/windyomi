@@ -14,43 +14,43 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/models/custom_button.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/models/track.dart' as track;
-import 'package:mangayomi/models/track_preference.dart';
-import 'package:mangayomi/models/track_search.dart';
-import 'package:mangayomi/modules/manga/detail/providers/track_state_providers.dart';
-import 'package:mangayomi/modules/manga/reader/providers/crop_borders_provider.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/storage_usage.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/general/providers/general_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
-import 'package:mangayomi/router/router.dart';
-import 'package:mangayomi/modules/more/settings/appearance/providers/theme_mode_state_provider.dart';
-import 'package:mangayomi/l10n/generated/app_localizations.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/services/isolate_service.dart';
-import 'package:mangayomi/services/m_extension_server.dart';
-import 'package:mangayomi/services/download_manager/m_downloader.dart';
-import 'package:mangayomi/src/rust/frb_generated.dart';
-import 'package:mangayomi/utils/discord_rpc.dart';
-import 'package:mangayomi/utils/log/logger.dart';
-import 'package:mangayomi/utils/platform_utils.dart';
-import 'package:mangayomi/utils/url_protocol/api.dart';
-import 'package:mangayomi/modules/more/settings/appearance/providers/theme_provider.dart';
-import 'package:mangayomi/modules/library/providers/file_scanner.dart';
-import 'package:mangayomi/modules/more/settings/security/providers/security_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/security/app_lock_screen.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/models/custom_button.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/models/track.dart' as track;
+import 'package:windyomi/models/track_preference.dart';
+import 'package:windyomi/models/track_search.dart';
+import 'package:windyomi/modules/manga/detail/providers/track_state_providers.dart';
+import 'package:windyomi/modules/manga/reader/providers/crop_borders_provider.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/storage_usage.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/modules/more/settings/general/providers/general_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/providers/storage_provider.dart';
+import 'package:windyomi/router/router.dart';
+import 'package:windyomi/modules/more/settings/appearance/providers/theme_mode_state_provider.dart';
+import 'package:windyomi/l10n/generated/app_localizations.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/services/isolate_service.dart';
+import 'package:windyomi/services/m_extension_server.dart';
+import 'package:windyomi/services/download_manager/m_downloader.dart';
+import 'package:windyomi/src/rust/frb_generated.dart';
+import 'package:windyomi/utils/discord_rpc.dart';
+import 'package:windyomi/utils/log/logger.dart';
+import 'package:windyomi/utils/platform_utils.dart';
+import 'package:windyomi/utils/url_protocol/api.dart';
+import 'package:windyomi/modules/more/settings/appearance/providers/theme_provider.dart';
+import 'package:windyomi/modules/library/providers/file_scanner.dart';
+import 'package:windyomi/modules/more/settings/security/providers/security_state_provider.dart';
+import 'package:windyomi/modules/more/settings/security/app_lock_screen.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:mangayomi/utils/window_geometry.dart';
+import 'package:windyomi/utils/window_geometry.dart';
 
 late Isar isar;
 DiscordRPC? discordRpc;
@@ -98,7 +98,7 @@ void main(List<String> args) async {
         await WindowGeometry.restore();
       }
       if (Platform.isWindows) {
-        registerProtocolHandler("mangayomi");
+        registerProtocolHandler("windyomi");
       }
       if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
         final availableVersion = await WebViewEnvironment.getAvailableVersion();
@@ -129,7 +129,7 @@ void main(List<String> args) async {
 Future<void> _postLaunchInit(StorageProvider storage) async {
   await AppLogger.init();
   unawaited(MDownloader.initializeIsolatePool(poolSize: 6));
-  final hivePath = isApple ? "databases" : p.join("Mangayomi", "databases");
+  final hivePath = isApple ? "databases" : p.join("Windyomi", "databases");
   await Hive.initFlutter(Platform.isAndroid ? "" : hivePath);
   Hive.registerAdapter(TrackSearchAdapter());
   if (isDesktop && !kDebugMode) {
@@ -233,7 +233,7 @@ class _MyAppState extends ConsumerState<MyApp>
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
       routeInformationProvider: router.routeInformationProvider,
-      title: 'MangaYomi',
+      title: 'Windyomi',
       scrollBehavior: AllowScrollBehavior(),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:d4rt/d4rt.dart';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/models/manga.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/models/manga.dart';
 
 class MMangaBridge {
   final mMangaBridgedClass = BridgedClass(
@@ -56,7 +56,7 @@ class MMangaBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mMangaBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

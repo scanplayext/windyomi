@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
-import 'package:mangayomi/utils/extensions/dom_extensions.dart';
+import 'package:windyomi/utils/extensions/dom_extensions.dart';
 
 class JsCheerio {
   late JavascriptRuntime runtime;

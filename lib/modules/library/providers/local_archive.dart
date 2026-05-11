@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/manga/archive_reader/models/models.dart';
-import 'package:mangayomi/modules/manga/archive_reader/providers/archive_reader_providers.dart';
-import 'package:mangayomi/src/rust/api/epub.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/manga/archive_reader/models/models.dart';
+import 'package:windyomi/modules/manga/archive_reader/providers/archive_reader_providers.dart';
+import 'package:windyomi/src/rust/api/epub.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'local_archive.g.dart';
 

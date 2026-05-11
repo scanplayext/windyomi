@@ -1,6 +1,6 @@
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/manga.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/manga.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'calendar_provider.g.dart';
 

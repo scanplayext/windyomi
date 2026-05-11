@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/settings/player/providers/player_decoder_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/settings/player/providers/player_decoder_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class PlayerDecoderScreen extends ConsumerStatefulWidget {

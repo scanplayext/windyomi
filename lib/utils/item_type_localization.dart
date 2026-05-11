@@ -1,5 +1,5 @@
-import 'package:mangayomi/l10n/generated/app_localizations.dart';
-import 'package:mangayomi/models/manga.dart';
+import 'package:windyomi/l10n/generated/app_localizations.dart';
+import 'package:windyomi/models/manga.dart';
 
 extension ItemTypeLocalization on ItemType {
   String localized(AppLocalizations l10n) {

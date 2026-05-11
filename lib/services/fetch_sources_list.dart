@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/filter.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/services/isolate_service.dart';
+import 'package:windyomi/eval/model/filter.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/services/isolate_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 Future<void> fetchSourcesList({

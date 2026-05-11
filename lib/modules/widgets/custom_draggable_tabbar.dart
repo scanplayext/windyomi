@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:draggable_menu/draggable_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/router/router.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/router/router.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 class MeasureWidgetSize extends StatefulWidget {
   final Function(Size? size) onCalculateSize;

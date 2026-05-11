@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/services/fetch_sources_list.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/services/fetch_sources_list.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'check_for_update.g.dart';
@@ -47,7 +47,7 @@ Future<UpdateInfo> _fetchLatestRelease() async {
   final http = MClient.init(reqcopyWith: {'useDartHttpClient': true});
   final res = await http.get(
     Uri.parse(
-      'https://api.github.com/repos/kodjodevf/Mangayomi/releases/latest',
+      'https://api.github.com/repos/scanplayext/windyomi/releases/latest',
     ),
   );
   final release = jsonDecode(res.body) as Map<String, dynamic>;

@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:mangayomi/services/http/rhttp/src/model/cancel_token.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/request.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/response.dart';
-import 'package:mangayomi/services/http/rhttp/src/model/settings.dart';
-import 'package:mangayomi/services/http/rhttp/src/request.dart';
-import 'package:mangayomi/src/rust/api/rhttp/client.dart' as rust_client;
-import 'package:mangayomi/src/rust/api/rhttp/http.dart' as rust;
+import 'package:windyomi/services/http/rhttp/src/model/cancel_token.dart';
+import 'package:windyomi/services/http/rhttp/src/model/request.dart';
+import 'package:windyomi/services/http/rhttp/src/model/response.dart';
+import 'package:windyomi/services/http/rhttp/src/model/settings.dart';
+import 'package:windyomi/services/http/rhttp/src/request.dart';
+import 'package:windyomi/src/rust/api/rhttp/client.dart' as rust_client;
+import 'package:windyomi/src/rust/api/rhttp/http.dart' as rust;
 
 /// An HTTP client that is used to make requests.
 /// Creating this is an expensive operation, so it is recommended to reuse it.

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:mangayomi/modules/more/settings/security/providers/security_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
+import 'package:windyomi/modules/more/settings/security/providers/security_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
 
 class SecurityScreen extends ConsumerStatefulWidget {
   const SecurityScreen({super.key});

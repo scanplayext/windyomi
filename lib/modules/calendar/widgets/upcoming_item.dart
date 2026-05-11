@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
-import 'package:mangayomi/utils/constant.dart';
-import 'package:mangayomi/utils/headers.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/widgets/custom_extended_image_provider.dart';
+import 'package:windyomi/utils/constant.dart';
+import 'package:windyomi/utils/headers.dart';
 
 const _upcomingItemHeight = 96.0;
 

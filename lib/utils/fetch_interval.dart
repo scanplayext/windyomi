@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:mangayomi/models/chapter.dart';
+import 'package:windyomi/models/chapter.dart';
 
 /// Computes the fetch interval and next expected update date for a manga.
 ///

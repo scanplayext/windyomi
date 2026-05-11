@@ -1,6 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mangayomi/models/settings.dart';
+import 'package:windyomi/models/settings.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 /// Service for handling page navigation in the manga reader.

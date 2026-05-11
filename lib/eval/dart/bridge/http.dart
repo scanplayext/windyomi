@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:d4rt/d4rt.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:mangayomi/eval/model/m_source.dart';
-import 'package:mangayomi/services/http/m_client.dart';
+import 'package:windyomi/eval/model/m_source.dart';
+import 'package:windyomi/services/http/m_client.dart';
 
 class HttpBridge {
   final clientBridgedClass = BridgedClass(
@@ -157,23 +157,23 @@ class HttpBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       baseRequestBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       clientBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       responseBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       streamedResponseBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
     interpreter.registerBridgedClass(
       byteStreamBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

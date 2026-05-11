@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:isar_community/isar.dart';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/eval/model/m_pages.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/more/settings/browse/providers/browse_state_provider.dart';
-import 'package:mangayomi/services/isolate_service.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/eval/model/m_pages.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/more/settings/browse/providers/browse_state_provider.dart';
+import 'package:windyomi/services/isolate_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'get_popular.g.dart';
 
@@ -25,9 +25,9 @@ Future<MPages?> getPopular(
                   (q) => q
                       .sourceEqualTo("local")
                       .or()
-                      .linkContains("Mangayomi/local")
+                      .linkContains("Windyomi/local")
                       .or()
-                      .linkContains("Mangayomi\\local"),
+                      .linkContains("Windyomi\\local"),
                 )
                 .sortByName()
                 .offset(max(0, page - 1) * 50)

@@ -1,13 +1,13 @@
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/utils/chapter_recognition.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/update.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/services/get_detail.dart';
-import 'package:mangayomi/utils/extensions/string_extensions.dart';
-import 'package:mangayomi/utils/fetch_interval.dart';
-import 'package:mangayomi/utils/utils.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/utils/chapter_recognition.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/update.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/services/get_detail.dart';
+import 'package:windyomi/utils/extensions/string_extensions.dart';
+import 'package:windyomi/utils/fetch_interval.dart';
+import 'package:windyomi/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'update_manga_detail_providers.g.dart';
 

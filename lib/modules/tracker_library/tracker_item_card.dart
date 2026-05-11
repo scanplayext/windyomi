@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mangayomi/l10n/generated/app_localizations.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/models/track_search.dart';
-import 'package:mangayomi/modules/manga/detail/widgets/readmore.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/cached_network.dart';
-import 'package:mangayomi/utils/constant.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/l10n/generated/app_localizations.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/models/track_search.dart';
+import 'package:windyomi/modules/manga/detail/widgets/readmore.dart';
+import 'package:windyomi/modules/widgets/custom_extended_image_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/cached_network.dart';
+import 'package:windyomi/utils/constant.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 class TrackerItemCard extends StatelessWidget {
   final TrackSearch track;

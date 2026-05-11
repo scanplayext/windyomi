@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/backup.dart';
-import 'package:mangayomi/providers/storage_provider.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/backup.dart';
+import 'package:windyomi/providers/storage_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:path/path.dart' as p;
 part 'auto_backup.g.dart';

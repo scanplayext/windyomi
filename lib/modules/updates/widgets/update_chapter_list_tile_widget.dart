@@ -3,12 +3,12 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
-import 'package:mangayomi/utils/constant.dart';
-import 'package:mangayomi/modules/manga/download/download_page_widget.dart';
-import 'package:mangayomi/utils/extensions/chapter_extensions.dart';
-import 'package:mangayomi/utils/headers.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/modules/widgets/custom_extended_image_provider.dart';
+import 'package:windyomi/utils/constant.dart';
+import 'package:windyomi/modules/manga/download/download_page_widget.dart';
+import 'package:windyomi/utils/extensions/chapter_extensions.dart';
+import 'package:windyomi/utils/headers.dart';
 
 class UpdateChapterListTileWidget extends ConsumerWidget {
   final Chapter chapter;

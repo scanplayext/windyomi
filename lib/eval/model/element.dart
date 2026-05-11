@@ -1,5 +1,5 @@
 import 'package:html/dom.dart';
-import 'package:mangayomi/utils/extensions/dom_extensions.dart';
+import 'package:windyomi/utils/extensions/dom_extensions.dart';
 
 class MElement {
   MElement(this._element);

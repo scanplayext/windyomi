@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:mangayomi/eval/javascript/http.dart';
-import 'package:mangayomi/eval/lib.dart';
-import 'package:mangayomi/main.dart';
-import 'package:mangayomi/models/settings.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/utils/utils.dart';
+import 'package:windyomi/eval/javascript/http.dart';
+import 'package:windyomi/eval/lib.dart';
+import 'package:windyomi/main.dart';
+import 'package:windyomi/models/settings.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'headers.g.dart';

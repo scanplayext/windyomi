@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/mass_migration/mass_migration_preview_screen.dart';
-import 'package:mangayomi/modules/mass_migration/models/mass_migration_models.dart';
-import 'package:mangayomi/modules/mass_migration/widgets/mass_migration_widgets.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/router/router.dart';
-import 'package:mangayomi/utils/language.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/mass_migration/mass_migration_preview_screen.dart';
+import 'package:windyomi/modules/mass_migration/models/mass_migration_models.dart';
+import 'package:windyomi/modules/mass_migration/widgets/mass_migration_widgets.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/router/router.dart';
+import 'package:windyomi/utils/language.dart';
 
 class MassMigrationSourceSelectionScreen extends StatelessWidget {
   const MassMigrationSourceSelectionScreen({

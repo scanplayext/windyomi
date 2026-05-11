@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:html/dom.dart';
-import 'package:mangayomi/services/http/m_client.dart';
-import 'package:mangayomi/utils/extensions/dom_extensions.dart';
+import 'package:windyomi/services/http/m_client.dart';
+import 'package:windyomi/utils/extensions/dom_extensions.dart';
 
 const _sequelData =
     "&types%5B%5D=1&types%5B%5D=3&types%5B%5D=2&types%5B%5D=4&types%5B%5D=9&score=0&date_from=false&date_to=false&include_ptw=1&exclude_h=1&exclude_planned=1&exclude_dropped=0&exclude_not_aired=0&exclude_short=1&exclude_short_value=3";

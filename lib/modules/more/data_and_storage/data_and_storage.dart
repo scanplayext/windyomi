@@ -4,14 +4,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mangayomi/eval/model/m_bridge.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/auto_backup.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/backup_compression.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/restore.dart';
-import 'package:mangayomi/modules/more/data_and_storage/providers/storage_usage.dart';
-import 'package:mangayomi/modules/more/settings/downloads/providers/downloads_state_provider.dart';
-import 'package:mangayomi/providers/l10n_providers.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/eval/model/m_bridge.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/auto_backup.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/backup_compression.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/restore.dart';
+import 'package:windyomi/modules/more/data_and_storage/providers/storage_usage.dart';
+import 'package:windyomi/modules/more/settings/downloads/providers/downloads_state_provider.dart';
+import 'package:windyomi/providers/l10n_providers.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 class DataAndStorage extends ConsumerWidget {

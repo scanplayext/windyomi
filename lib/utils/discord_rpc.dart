@@ -1,9 +1,9 @@
 import 'package:flutter_discord_rpc_fork/flutter_discord_rpc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/models/chapter.dart';
-import 'package:mangayomi/models/manga.dart';
-import 'package:mangayomi/modules/more/providers/incognito_mode_state_provider.dart';
-import 'package:mangayomi/modules/more/settings/general/providers/general_state_provider.dart';
+import 'package:windyomi/models/chapter.dart';
+import 'package:windyomi/models/manga.dart';
+import 'package:windyomi/modules/more/providers/incognito_mode_state_provider.dart';
+import 'package:windyomi/modules/more/settings/general/providers/general_state_provider.dart';
 
 class DiscordRPC {
   /// Id of the Discord Application
@@ -23,11 +23,11 @@ class DiscordRPC {
 
   /// Instance of the current RPC activity
   final RpcActivity activity = RpcActivity(
-    assets: const RPCAssets(largeImage: "app-icon", largeText: "Mangayomi"),
+    assets: const RPCAssets(largeImage: "app-icon", largeText: "Windyomi"),
     buttons: [
       const RPCButton(
-        label: "Get Mangayomi",
-        url: "https://github.com/kodjodevf/mangayomi",
+        label: "Get Windyomi",
+        url: "https://github.com/scanplayext/windyomi",
       ),
       const RPCButton(
         label: "Join us",
@@ -75,7 +75,7 @@ class DiscordRPC {
     await updateActivity(
       details: "Idle",
       state: "-----",
-      assets: const RPCAssets(largeImage: "app-icon", largeText: "Mangayomi"),
+      assets: const RPCAssets(largeImage: "app-icon", largeText: "Windyomi"),
     );
   }
 
@@ -99,15 +99,15 @@ class DiscordRPC {
               largeImage: imageUrl,
               largeText: rpcShowTitle ? chapter.manga.value!.name : "-----",
               smallImage: "app-icon",
-              smallText: "Mangayomi",
+              smallText: "Windyomi",
             )
-          : const RPCAssets(largeImage: "app-icon", largeText: "Mangayomi"),
+          : const RPCAssets(largeImage: "app-icon", largeText: "Windyomi"),
     );
   }
 
   Future<void> showLargeImage() async {
     await updateActivity(
-      assets: const RPCAssets(largeImage: "app-icon", largeText: "Mangayomi"),
+      assets: const RPCAssets(largeImage: "app-icon", largeText: "Windyomi"),
     );
   }
 
@@ -117,7 +117,7 @@ class DiscordRPC {
         largeImage: largeImage,
         largeText: largeText,
         smallImage: "app-icon",
-        smallText: "Mangayomi",
+        smallText: "Windyomi",
       ),
     );
   }

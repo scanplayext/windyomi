@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
+import 'package:windyomi/utils/extensions/build_context_extensions.dart';
 
 /// Bar, that appears at the bottom of the screen when long-pressing (selecting)
 /// a Manga/Anime/Novel or Chapter/Episode

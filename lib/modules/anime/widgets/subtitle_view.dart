@@ -9,7 +9,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mangayomi/modules/anime/providers/state_provider.dart';
+import 'package:windyomi/modules/anime/providers/state_provider.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
 class CustomSubtitleView extends ConsumerStatefulWidget {

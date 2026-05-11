@@ -1,18 +1,18 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:flutter_qjs/flutter_qjs.dart';
-import 'package:mangayomi/eval/javascript/dom_selector.dart';
-import 'package:mangayomi/eval/javascript/extractors.dart';
-import 'package:mangayomi/eval/javascript/http.dart';
-import 'package:mangayomi/eval/javascript/preferences.dart';
-import 'package:mangayomi/eval/javascript/utils.dart';
-import 'package:mangayomi/eval/model/filter.dart';
-import 'package:mangayomi/eval/model/m_manga.dart';
-import 'package:mangayomi/eval/model/m_pages.dart';
-import 'package:mangayomi/eval/model/source_preference.dart';
-import 'package:mangayomi/models/page.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/models/video.dart';
+import 'package:windyomi/eval/javascript/dom_selector.dart';
+import 'package:windyomi/eval/javascript/extractors.dart';
+import 'package:windyomi/eval/javascript/http.dart';
+import 'package:windyomi/eval/javascript/preferences.dart';
+import 'package:windyomi/eval/javascript/utils.dart';
+import 'package:windyomi/eval/model/filter.dart';
+import 'package:windyomi/eval/model/m_manga.dart';
+import 'package:windyomi/eval/model/m_pages.dart';
+import 'package:windyomi/eval/model/source_preference.dart';
+import 'package:windyomi/models/page.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/models/video.dart';
 
 import '../interface.dart';
 

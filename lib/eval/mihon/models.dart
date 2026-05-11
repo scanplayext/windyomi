@@ -1,4 +1,4 @@
-import 'package:mangayomi/models/manga.dart';
+import 'package:windyomi/models/manga.dart';
 
 class MangaPages {
   List<SManga> list;

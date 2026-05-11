@@ -1,5 +1,5 @@
 import 'package:d4rt/d4rt.dart';
-import 'package:mangayomi/eval/model/m_source.dart';
+import 'package:windyomi/eval/model/m_source.dart';
 
 class MSourceBridge {
   final mSourceBridgedClass = BridgedClass(
@@ -41,7 +41,7 @@ class MSourceBridge {
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mSourceBridgedClass,
-      'package:mangayomi/bridge_lib.dart',
+      'package:windyomi/bridge_lib.dart',
     );
   }
 }

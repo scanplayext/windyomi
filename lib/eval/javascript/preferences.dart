@@ -1,6 +1,6 @@
 import 'package:flutter_qjs/flutter_qjs.dart';
-import 'package:mangayomi/models/source.dart';
-import 'package:mangayomi/modules/browse/extension/providers/extension_preferences_providers.dart';
+import 'package:windyomi/models/source.dart';
+import 'package:windyomi/modules/browse/extension/providers/extension_preferences_providers.dart';
 
 class JsPreferences {
   late JavascriptRuntime runtime;
