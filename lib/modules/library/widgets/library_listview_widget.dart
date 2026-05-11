@@ -1,16 +1,11 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mangayomi/models/manga.dart';
 import 'package:mangayomi/modules/library/widgets/continue_reader_button.dart';
 import 'package:mangayomi/modules/manga/detail/providers/state_providers.dart';
 import 'package:mangayomi/modules/library/widgets/library_entry_utils.dart';
-import 'package:mangayomi/modules/widgets/custom_extended_image_provider.dart';
-import 'package:mangayomi/utils/constant.dart';
 import 'package:mangayomi/utils/extensions/build_context_extensions.dart';
 import 'package:mangayomi/modules/widgets/listview_widget.dart';
-import 'package:mangayomi/utils/headers.dart';
 
 class LibraryListViewWidget extends StatelessWidget {
   final List<Manga> entriesManga;
@@ -79,25 +74,7 @@ class LibraryListViewWidget extends StatelessWidget {
                                       fit: BoxFit.cover,
                                       width: 40,
                                       height: 45,
-                                      image: entry.customCoverImage != null
-                                          ? MemoryImage(
-                                                  entry.customCoverImage
-                                                      as Uint8List,
-                                                )
-                                                as ImageProvider
-                                          : CustomExtendedNetworkImageProvider(
-                                              toImgUrl(
-                                                entry.customCoverFromTracker ??
-                                                    entry.imageUrl!,
-                                              ),
-                                              headers: ref.watch(
-                                                headersProvider(
-                                                  source: entry.source!,
-                                                  lang: entry.lang!,
-                                                  sourceId: entry.sourceId,
-                                                ),
-                                              ),
-                                            ),
+                                      image: resolveCoverImage(entry, ref),
                                       child: InkWell(
                                         child: Container(
                                           color: mangaIdsList.contains(entry.id)
