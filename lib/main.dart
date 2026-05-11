@@ -212,13 +212,10 @@ class _MyAppState extends ConsumerState<MyApp>
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {
-        child = BotToastInit()(context, child);
-        final appChild = child;
-        if (!isMobile) {
-          child = _MouseBackButtonHandler(router: router, child: appChild);
-        } else {
-          child = appChild;
-        }
+        final base = BotToastInit()(context, child);
+        final withBackHandler = !isMobile
+            ? _MouseBackButtonHandler(router: router, child: base)
+            : base;
 
         if (!Platform.isLinux) {
           final isUnlocked = ref.watch(appUnlockedStateProvider);
@@ -226,12 +223,12 @@ class _MyAppState extends ConsumerState<MyApp>
           if (lockEnabled && !isUnlocked) {
             return Stack(
               fit: StackFit.expand,
-              children: [child, const AppLockScreen()],
+              children: [withBackHandler, const AppLockScreen()],
             );
           }
         }
 
-        return child;
+        return withBackHandler;
       },
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
