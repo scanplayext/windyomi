@@ -98,6 +98,14 @@ class MoreScreenState extends ConsumerState<MoreScreen> {
             ),
             ListTileWidget(
               onTap: () {
+                context.push('/crunchyroll');
+              },
+              icon: Icons.play_circle_outline,
+              title: 'Crunchyroll',
+              subtitle: 'Reproductor oficial integrado',
+            ),
+            ListTileWidget(
+              onTap: () {
                 context.push('/dataAndStorage');
               },
               icon: Icons.storage,

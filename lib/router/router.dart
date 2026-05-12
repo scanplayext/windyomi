@@ -15,6 +15,7 @@ import 'package:windyomi/modules/browse/extension/extension_detail.dart';
 import 'package:windyomi/modules/browse/extension/widgets/create_extension.dart';
 import 'package:windyomi/modules/browse/sources/sources_filter_screen.dart';
 import 'package:windyomi/modules/calendar/calendar_screen.dart';
+import 'package:windyomi/modules/crunchyroll/crunchyroll_player_screen.dart';
 import 'package:windyomi/modules/manga/detail/widgets/migrate_screen.dart';
 import 'package:windyomi/modules/mass_migration/mass_migration_source_selection_screen.dart';
 import 'package:windyomi/modules/manga/detail/widgets/recommendation_screen.dart';
@@ -218,6 +219,7 @@ class RouterNotifier extends ChangeNotifier {
     ),
     _genericRoute(name: "downloads", child: const DownloadsScreen()),
     _genericRoute(name: "dataAndStorage", child: const DataAndStorage()),
+    _genericRoute(name: "crunchyroll", child: const CrunchyrollPlayerScreen()),
     _genericRoute(name: "stremioAddons", child: const StremioAddonsScreen()),
     _genericRoute(name: "torrentStream", child: const TorrentStreamScreen()),
     _genericRoute(name: "security", child: const SecurityScreen()),
