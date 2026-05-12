@@ -102,7 +102,7 @@ class MoreScreenState extends ConsumerState<MoreScreen> {
               },
               icon: Icons.play_circle_outline,
               title: 'Crunchyroll',
-              subtitle: 'Reproductor oficial integrado',
+              subtitle: 'Catalogo anime + reproductor oficial',
             ),
             ListTileWidget(
               onTap: () {

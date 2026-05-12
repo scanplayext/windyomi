@@ -8,7 +8,10 @@ import 'package:windyomi/main.dart';
 import 'package:windyomi/utils/global_style.dart';
 
 class CrunchyrollPlayerScreen extends StatefulWidget {
-  const CrunchyrollPlayerScreen({super.key});
+  final String? initialUrl;
+  final String? title;
+
+  const CrunchyrollPlayerScreen({super.key, this.initialUrl, this.title});
 
   @override
   State<CrunchyrollPlayerScreen> createState() =>
@@ -21,12 +24,18 @@ class _CrunchyrollPlayerScreenState extends State<CrunchyrollPlayerScreen> {
   InAppWebViewController? _controller;
   final _searchController = TextEditingController();
   double _progress = 0;
-  String _title = 'Crunchyroll';
-  String _url = _homeUrl.toString();
+  late String _title = widget.title ?? 'Crunchyroll';
+  late String _url = _initialUrl.toString();
   bool _canGoBack = false;
   bool _canGoForward = false;
   bool _showSearch = false;
   bool _isFullscreen = false;
+
+  WebUri get _initialUrl {
+    final value = widget.initialUrl;
+    if (value == null || value.trim().isEmpty) return _homeUrl;
+    return WebUri(value.trim());
+  }
 
   @override
   void dispose() {
@@ -269,7 +278,7 @@ class _CrunchyrollPlayerScreenState extends State<CrunchyrollPlayerScreen> {
             Expanded(
               child: InAppWebView(
                 webViewEnvironment: webViewEnvironment,
-                initialUrlRequest: URLRequest(url: _homeUrl),
+                initialUrlRequest: URLRequest(url: _initialUrl),
                 initialSettings: InAppWebViewSettings(
                   allowsAirPlayForMediaPlayback: true,
                   allowsBackForwardNavigationGestures: true,

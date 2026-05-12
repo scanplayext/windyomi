@@ -15,6 +15,8 @@ import 'package:windyomi/modules/browse/extension/extension_detail.dart';
 import 'package:windyomi/modules/browse/extension/widgets/create_extension.dart';
 import 'package:windyomi/modules/browse/sources/sources_filter_screen.dart';
 import 'package:windyomi/modules/calendar/calendar_screen.dart';
+import 'package:windyomi/modules/crunchyroll/crunchyroll_detail_screen.dart';
+import 'package:windyomi/modules/crunchyroll/crunchyroll_home_screen.dart';
 import 'package:windyomi/modules/crunchyroll/crunchyroll_player_screen.dart';
 import 'package:windyomi/modules/manga/detail/widgets/migrate_screen.dart';
 import 'package:windyomi/modules/mass_migration/mass_migration_source_selection_screen.dart';
@@ -63,6 +65,7 @@ import 'package:windyomi/modules/more/settings/settings_screen.dart';
 import 'package:windyomi/modules/more/settings/security/security_screen.dart';
 import 'package:windyomi/modules/stremio/stremio_addons_screen.dart';
 import 'package:windyomi/modules/torrent/torrent_stream_screen.dart';
+import 'package:windyomi/services/crunchyroll/crunchyroll_catalog_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/cupertino.dart';
 part 'router.g.dart';
@@ -219,7 +222,18 @@ class RouterNotifier extends ChangeNotifier {
     ),
     _genericRoute(name: "downloads", child: const DownloadsScreen()),
     _genericRoute(name: "dataAndStorage", child: const DataAndStorage()),
-    _genericRoute(name: "crunchyroll", child: const CrunchyrollPlayerScreen()),
+    _genericRoute(name: "crunchyroll", child: const CrunchyrollHomeScreen()),
+    _genericRoute<CrunchyrollSeries>(
+      name: "crunchyrollDetail",
+      builder: (series) => CrunchyrollDetailScreen(series: series),
+    ),
+    _genericRoute<Map<String, dynamic>>(
+      name: "crunchyrollPlayer",
+      builder: (data) => CrunchyrollPlayerScreen(
+        initialUrl: data["url"]?.toString(),
+        title: data["title"]?.toString(),
+      ),
+    ),
     _genericRoute(name: "stremioAddons", child: const StremioAddonsScreen()),
     _genericRoute(name: "torrentStream", child: const TorrentStreamScreen()),
     _genericRoute(name: "security", child: const SecurityScreen()),
