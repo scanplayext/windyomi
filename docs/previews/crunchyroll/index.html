@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Windyomi Crunchyroll Preview</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080810;
+        --panel: #11101a;
+        --panel-2: #191529;
+        --text: #f8f6ff;
+        --muted: #b8b0d0;
+        --primary: #8c72ea;
+        --primary-soft: rgba(140, 114, 234, 0.18);
+        --orange: #f47521;
+        --line: #2e2944;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 70% 15%, rgba(140, 114, 234, 0.22), transparent 35%),
+          linear-gradient(135deg, #070710 0%, #171127 100%);
+        color: var(--text);
+        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: minmax(320px, 430px) minmax(280px, 1fr);
+        gap: 34px;
+        min-height: 100vh;
+        padding: 34px;
+        align-items: center;
+      }
+
+      .phone {
+        width: min(430px, calc(100vw - 40px));
+        aspect-ratio: 390 / 844;
+        margin: auto;
+        padding: 8px;
+        border-radius: 34px;
+        background: #020207;
+        box-shadow: 0 34px 80px rgba(0, 0, 0, 0.48);
+      }
+
+      .screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 28px;
+        background: #09090f;
+      }
+
+      .status {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        font-size: 12px;
+        font-weight: 700;
+        background: #0d0c15;
+      }
+
+      .appbar {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 16px;
+        background: var(--panel);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .appbar h1 {
+        flex: 1;
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.1;
+      }
+
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+        display: inline-grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        font-size: 19px;
+      }
+
+      .icon-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .tabs {
+        display: flex;
+        gap: 8px;
+        padding: 9px 14px;
+        background: var(--panel);
+        border-bottom: 1px solid var(--primary);
+      }
+
+      .tab {
+        height: 30px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .tab.active {
+        color: #080810;
+        background: var(--primary);
+      }
+
+      .search {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+      }
+
+      .content {
+        height: calc(100% - 139px);
+        overflow: auto;
+        padding: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px 10px;
+      }
+
+      .card {
+        border: 0;
+        padding: 0;
+        color: var(--text);
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .poster {
+        position: relative;
+        aspect-ratio: 2 / 3;
+        overflow: hidden;
+        border-radius: 5px;
+        background: linear-gradient(145deg, #302351, #11111a);
+      }
+
+      .poster::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.16), transparent 28%),
+          linear-gradient(180deg, transparent 56%, rgba(0, 0, 0, 0.78));
+      }
+
+      .poster span {
+        position: absolute;
+        left: 6px;
+        right: 6px;
+        bottom: 7px;
+        font-size: 11px;
+        font-weight: 800;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .play-dot {
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 5px;
+        background: var(--primary);
+        color: #05050a;
+        font-size: 13px;
+      }
+
+      .load-more {
+        width: 160px;
+        height: 44px;
+        margin: 24px auto 0;
+        display: block;
+        border: 0;
+        border-radius: 6px;
+        color: var(--text);
+        background: var(--panel-2);
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .detail {
+        height: calc(100% - 36px);
+        overflow: auto;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 310px;
+        padding: 82px 18px 22px;
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+        background:
+          linear-gradient(180deg, rgba(23, 18, 49, 0.25), #09090f),
+          linear-gradient(145deg, #392d63, #0a0a12);
+      }
+
+      .hero .back,
+      .hero .top-play {
+        position: absolute;
+        top: 14px;
+      }
+
+      .hero .back {
+        left: 12px;
+      }
+
+      .hero .top-play {
+        right: 12px;
+      }
+
+      .cover {
+        width: 106px;
+        aspect-ratio: 2 / 3;
+        flex: 0 0 auto;
+        border-radius: 5px;
+        background: linear-gradient(145deg, #285174, #151523);
+      }
+
+      .hero-title {
+        min-width: 0;
+        padding-bottom: 10px;
+      }
+
+      .hero-title h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .hero-title p {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 14px 16px 4px;
+      }
+
+      .chip {
+        padding: 7px 11px;
+        border-radius: 10px;
+        background: var(--panel-2);
+        color: var(--text);
+        font-size: 12px;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 52px;
+        gap: 10px;
+        padding: 12px 16px;
+      }
+
+      .primary {
+        border: 0;
+        border-radius: 7px;
+        background: var(--primary);
+        color: #070710;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .secondary {
+        border: 0;
+        border-radius: 7px;
+        background: var(--panel-2);
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .meta {
+        padding: 4px 16px 16px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .section-title {
+        padding: 4px 16px 8px;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .episode {
+        min-height: 62px;
+        display: grid;
+        grid-template-columns: 4px 74px 1fr 36px;
+        gap: 12px;
+        align-items: center;
+        padding: 6px 16px;
+        border: 0;
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .episode .bar {
+        width: 3px;
+        height: 38px;
+        border-radius: 3px;
+        background: var(--primary);
+      }
+
+      .thumb {
+        height: 42px;
+        border-radius: 5px;
+        background: linear-gradient(145deg, #2b2247, #0f0e16);
+      }
+
+      .episode strong {
+        display: block;
+        font-size: 14px;
+      }
+
+      .episode small {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+      }
+
+      .player-content {
+        height: calc(100% - 98px);
+        padding: 22px;
+        background: #05050a;
+      }
+
+      .cr-header {
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        border-radius: 14px;
+        background: var(--panel);
+      }
+
+      .account {
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 16px;
+        background: var(--orange);
+        color: #080808;
+        font-weight: 900;
+      }
+
+      .video {
+        height: 260px;
+        margin-top: 38px;
+        border-radius: 12px;
+        background: #000209;
+        overflow: hidden;
+      }
+
+      .video .play {
+        height: 218px;
+        display: grid;
+        place-items: center;
+        font-size: 64px;
+      }
+
+      .timeline {
+        height: 42px;
+        padding: 14px 18px;
+        background: #11101a;
+      }
+
+      .timeline div {
+        height: 6px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, var(--orange) 45%, #4d4864 45%);
+      }
+
+      .player-note {
+        margin-top: 58px;
+      }
+
+      .player-note h2 {
+        margin: 0 0 10px;
+        font-size: 24px;
+      }
+
+      .player-note p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .side {
+        max-width: 820px;
+      }
+
+      .side h2 {
+        margin: 0 0 14px;
+        font-size: clamp(34px, 5vw, 62px);
+        line-height: 1;
+      }
+
+      .side p {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      .steps {
+        display: grid;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .step button {
+        margin-left: auto;
+        border: 0;
+        border-radius: 7px;
+        padding: 9px 14px;
+        background: var(--primary);
+        color: #080810;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          grid-template-columns: 1fr;
+          padding: 20px;
+        }
+
+        .side {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="phone" aria-label="Vista previa Windyomi">
+        <div class="screen" id="screen"></div>
+      </section>
+
+      <section class="side">
+        <h2>Visualizador literal del apartado Crunchyroll</h2>
+        <p>
+          Esta preview reproduce el flujo que queda en Windyomi: una home como fuente de
+          anime, una ficha con episodios y el reproductor oficial integrado mediante WebView.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <strong>1</strong>
+            Catalogo nativo con Popular, Ultimos y Buscar
+            <button data-route="home">Ver</button>
+          </div>
+          <div class="step">
+            <strong>2</strong>
+            Ficha tipo anime con informacion y episodios
+            <button data-route="detail">Ver</button>
+          </div>
+          <div class="step">
+            <strong>3</strong>
+            Reproductor oficial dentro de Windyomi
+            <button data-route="player">Ver</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const series = [
+        ["Attack on Titan", "#342454", "#0f0b18"],
+        ["Demon Slayer", "#57272d", "#151018"],
+        ["JUJUTSU KAISEN", "#26395d", "#080b12"],
+        ["One Piece", "#315d8d", "#090b12"],
+        ["My Hero Academia", "#28534d", "#090e14"],
+        ["Tokyo Ghoul", "#3b1830", "#0b0710"],
+        ["Hunter x Hunter", "#27415f", "#0b1018"],
+        ["Black Clover", "#3f285f", "#0c0a14"],
+        ["Dr. STONE", "#385c42", "#0a120c"]
+      ];
+
+      const screen = document.querySelector("#screen");
+
+      function status() {
+        return `<div class="status"><span>9:41</span><span>5G&nbsp;&nbsp;100%</span></div>`;
+      }
+
+      function renderHome(search = false) {
+        screen.innerHTML = `
+          ${status()}
+          <div class="appbar">
+            ${search ? `<button class="icon-btn" data-route="home">&lt;</button><input class="search" value="one piece" />` : `<h1>Crunchyroll</h1><button class="icon-btn" data-route="search">⌕</button><button class="icon-btn">↻</button>`}
+          </div>
+          <div class="tabs">
+            <button class="tab active">Popular</button>
+            <button class="tab">Ultimos</button>
+            <button class="tab" data-route="search">Buscar</button>
+          </div>
+          <div class="content">
+            <div class="grid">
+              ${series
+                .map(([title, a, b]) => `
+                  <button class="card" data-route="detail">
+                    <div class="poster" style="background: linear-gradient(145deg, ${a}, ${b});">
+                      <span class="play-dot">▶</span>
+                      <span>${title}</span>
+                    </div>
+                  </button>
+                `)
+                .join("")}
+            </div>
+            <button class="load-more">Cargar mas &gt;</button>
+          </div>
+        `;
+      }
+
+      function renderDetail() {
+        screen.innerHTML = `
+          ${status()}
+          <div class="detail">
+            <div class="hero">
+              <button class="icon-btn back" data-route="home">&lt;</button>
+              <button class="icon-btn top-play" data-route="player">▶</button>
+              <div class="cover"></div>
+              <div class="hero-title">
+                <h2>ONE PIECE</h2>
+                <p>ワンピース</p>
+              </div>
+            </div>
+            <div class="chips">
+              <span class="chip">1999</span>
+              <span class="chip">En emision</span>
+              <span class="chip">1130 eps</span>
+              <span class="chip">24 min</span>
+              <span class="chip">89%</span>
+            </div>
+            <div class="actions">
+              <button class="primary" data-route="player">▶ Reproducir</button>
+              <button class="secondary" data-route="player">⛶</button>
+            </div>
+            <div class="meta">
+              Action - Adventure - Fantasy<br />
+              Monkey D. Luffy quiere convertirse en el Rey de los Piratas. La ficha mantiene la forma del apartado anime de Windyomi.
+            </div>
+            <div class="section-title">Episodios</div>
+            ${[1125, 1126, 1127, 1128, 1129, 1130]
+              .map((ep) => `
+                <button class="episode" data-route="player">
+                  <span class="bar"></span>
+                  <span class="thumb"></span>
+                  <span><strong>Episodio ${ep}</strong><small>24 min - reproductor oficial</small></span>
+                  <span>▶</span>
+                </button>
+              `)
+              .join("")}
+          </div>
+        `;
+      }
+
+      function renderPlayer() {
+        screen.innerHTML = `
+          ${status()}
+          <div class="appbar">
+            <button class="icon-btn" data-route="detail">&lt;</button>
+            <h1>ONE PIECE</h1>
+            <button class="icon-btn">⌕</button>
+            <button class="icon-btn">↻</button>
+          </div>
+          <div class="player-content">
+            <div class="cr-header">
+              <strong>Crunchyroll oficial</strong>
+              <button class="account">Mi cuenta</button>
+            </div>
+            <div class="video">
+              <div class="play">▶</div>
+              <div class="timeline"><div></div></div>
+            </div>
+            <div class="player-note">
+              <h2>Player WebView</h2>
+              <p>
+                Aqui entra el reproductor real de Crunchyroll. Windyomi mantiene el flujo de anime
+                y solo cambia esta pantalla por la WebView oficial.
+              </p>
+            </div>
+          </div>
+        `;
+      }
+
+      function route(name) {
+        if (name === "detail") renderDetail();
+        else if (name === "player") renderPlayer();
+        else if (name === "search") renderHome(true);
+        else renderHome(false);
+      }
+
+      document.body.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-route]");
+        if (!button) return;
+        route(button.dataset.route);
+      });
+
+      route("home");
+    </script>
+  </body>
+</html>
