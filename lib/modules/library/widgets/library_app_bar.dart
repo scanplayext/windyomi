@@ -1,6 +1,7 @@
 import 'package:windyomi/utils/platform_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:windyomi/models/manga.dart';
 import 'package:windyomi/models/settings.dart';
 import 'package:windyomi/modules/library/library_screen.dart';
@@ -154,6 +155,13 @@ class LibraryAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 },
               ),
             ],
+          ),
+        if (!isSearch && itemType == ItemType.anime)
+          IconButton(
+            tooltip: 'Crunchyroll',
+            splashRadius: 20,
+            onPressed: () => context.push('/crunchyroll'),
+            icon: const Icon(Icons.play_circle_outline_rounded),
           ),
         IconButton(
           splashRadius: 20,

@@ -176,11 +176,6 @@ class RouterNotifier extends ChangeNotifier {
           directionalTransition: true,
         ),
         _genericRoute(
-          name: "crunchyroll",
-          child: const CrunchyrollHomeScreen(),
-          directionalTransition: true,
-        ),
-        _genericRoute(
           name: "more",
           child: const MoreScreen(),
           directionalTransition: true,
@@ -251,6 +246,7 @@ class RouterNotifier extends ChangeNotifier {
     ),
     _genericRoute(name: "downloads", child: const DownloadsScreen()),
     _genericRoute(name: "dataAndStorage", child: const DataAndStorage()),
+    _genericRoute(name: "crunchyroll", child: const CrunchyrollHomeScreen()),
     _genericRoute<CrunchyrollSeries>(
       name: "crunchyrollDetail",
       builder: (series) => CrunchyrollDetailScreen(series: series),

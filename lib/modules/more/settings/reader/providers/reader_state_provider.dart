@@ -188,7 +188,6 @@ class NavigationOrderState extends _$NavigationOrderState {
   final items = [
     '/MangaLibrary',
     '/AnimeLibrary',
-    '/crunchyroll',
     '/NovelLibrary',
     '/updates',
     '/history',
@@ -205,15 +204,9 @@ class NavigationOrderState extends _$NavigationOrderState {
   }
 
   List<String> _checkMissingItems(List<String> navigationOrder) {
+    navigationOrder.remove('/crunchyroll');
     for (final item in items.where((e) => !navigationOrder.contains(e))) {
-      if (item == '/crunchyroll' && navigationOrder.contains('/AnimeLibrary')) {
-        navigationOrder.insert(
-          navigationOrder.indexOf('/AnimeLibrary') + 1,
-          item,
-        );
-      } else {
-        navigationOrder.add(item);
-      }
+      navigationOrder.add(item);
     }
     return navigationOrder;
   }

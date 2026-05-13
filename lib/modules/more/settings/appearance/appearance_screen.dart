@@ -24,7 +24,6 @@ final navigationItems = {
   "/updates": "Updates",
   "/history": "History",
   "/browse": "Browse",
-  "/crunchyroll": "Crunchyroll",
   "/more": "More",
   "/trackerLibrary": "Tracking",
 };

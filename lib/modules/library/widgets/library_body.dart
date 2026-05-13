@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:windyomi/models/manga.dart';
 import 'package:windyomi/models/settings.dart';
 import 'package:windyomi/modules/library/providers/isar_providers.dart';
@@ -103,11 +104,16 @@ class LibraryBody extends ConsumerWidget {
         );
 
         if (entries.isEmpty) {
-          return Center(child: Text(l10n.empty_library));
+          return Column(
+            children: [
+              if (_showCrunchyrollShortcut) const _CrunchyrollLibraryShortcut(),
+              Expanded(child: Center(child: Text(l10n.empty_library))),
+            ],
+          );
         }
 
         final entriesManga = reverse ? entries.reversed.toList() : entries;
-        return RefreshIndicator(
+        final libraryList = RefreshIndicator(
           onRefresh: () async {
             await updateLibrary(
               ref: ref,
@@ -137,9 +143,44 @@ class LibraryBody extends ConsumerWidget {
                   itemType: itemType,
                 ),
         );
+
+        if (!_showCrunchyrollShortcut) return libraryList;
+
+        return Column(
+          children: [
+            const _CrunchyrollLibraryShortcut(),
+            Expanded(child: libraryList),
+          ],
+        );
       },
       error: (error, _) => ErrorText(error),
       loading: () => const ProgressCenter(),
+    );
+  }
+
+  bool get _showCrunchyrollShortcut =>
+      itemType == ItemType.anime && searchQuery.trim().isEmpty;
+}
+
+class _CrunchyrollLibraryShortcut extends StatelessWidget {
+  const _CrunchyrollLibraryShortcut();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 6),
+      child: Material(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(8),
+        clipBehavior: Clip.antiAlias,
+        child: ListTile(
+          leading: const Icon(Icons.play_circle_outline_rounded),
+          title: const Text('Crunchyroll'),
+          subtitle: const Text('Catalogo anime + reproductor oficial'),
+          trailing: const Icon(Icons.chevron_right_rounded),
+          onTap: () => context.push('/crunchyroll'),
+        ),
+      ),
     );
   }
 }
