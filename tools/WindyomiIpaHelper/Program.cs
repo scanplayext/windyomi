@@ -117,11 +117,18 @@ sealed class GitHubActionsHelper : IDisposable
 
         while (!string.Equals(run.Status, "completed", StringComparison.OrdinalIgnoreCase))
         {
-            Console.WriteLine($"Estado: {run.Status}. Siguiente revision en 15s...");
-            await Task.Delay(TimeSpan.FromSeconds(15));
+            var progress = await GetRunProgress(run.Id);
+            ConsoleProgress.WriteBar(
+                "Compilando IPA",
+                progress.Completed,
+                progress.Total,
+                progress.Label);
+            await Task.Delay(TimeSpan.FromSeconds(10));
             run = await GetRun(run.Id);
         }
 
+        ConsoleProgress.WriteBar("Compilando IPA", 1, 1, "build terminada");
+        Console.WriteLine();
         Console.WriteLine($"Resultado: {run.Conclusion}");
         if (!string.Equals(run.Conclusion, "success", StringComparison.OrdinalIgnoreCase))
         {
@@ -157,11 +164,7 @@ sealed class GitHubActionsHelper : IDisposable
         }
 
         var tempZip = Path.Combine(Path.GetTempPath(), $"windyomi-ipa-{runId}.zip");
-        await using (var stream = await _http.GetStreamAsync(artifact.ArchiveDownloadUrl))
-        await using (var file = File.Create(tempZip))
-        {
-            await stream.CopyToAsync(file);
-        }
+        await DownloadFileWithProgress(artifact.ArchiveDownloadUrl, tempZip);
 
         var extractDir = Path.Combine(Path.GetTempPath(), $"windyomi-ipa-{runId}");
         if (Directory.Exists(extractDir))
@@ -217,6 +220,99 @@ sealed class GitHubActionsHelper : IDisposable
         return artifacts.EnumerateArray().Select(GitHubArtifact.FromJson).ToList();
     }
 
+    private async Task<GitHubRunProgress> GetRunProgress(long runId)
+    {
+        using var doc = await GetJson(Api($"actions/runs/{runId}/jobs?per_page=100"));
+        var jobs = doc.RootElement.GetProperty("jobs");
+        var total = 0;
+        var completed = 0;
+        var activeLabel = "preparando runner";
+
+        foreach (var job in jobs.EnumerateArray())
+        {
+            if (!job.TryGetProperty("steps", out var steps))
+            {
+                continue;
+            }
+
+            foreach (var step in steps.EnumerateArray())
+            {
+                total++;
+                var status = step.GetProperty("status").GetString() ?? "";
+                var name = step.GetProperty("name").GetString() ?? "step";
+
+                if (string.Equals(status, "completed", StringComparison.OrdinalIgnoreCase))
+                {
+                    completed++;
+                }
+                else if (string.Equals(status, "in_progress", StringComparison.OrdinalIgnoreCase))
+                {
+                    activeLabel = name;
+                }
+            }
+        }
+
+        if (total == 0)
+        {
+            return new GitHubRunProgress(0, 1, activeLabel);
+        }
+
+        return new GitHubRunProgress(completed, total, activeLabel);
+    }
+
+    private async Task DownloadFileWithProgress(string url, string target)
+    {
+        using var response = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new InvalidOperationException(
+                $"No se pudo descargar el artefacto ({(int)response.StatusCode}).");
+        }
+
+        var total = response.Content.Headers.ContentLength ?? 0;
+        var downloaded = 0L;
+        var buffer = new byte[1024 * 128];
+
+        await using var stream = await response.Content.ReadAsStreamAsync();
+        await using var file = File.Create(target);
+
+        while (true)
+        {
+            var read = await stream.ReadAsync(buffer);
+            if (read == 0)
+            {
+                break;
+            }
+
+            await file.WriteAsync(buffer.AsMemory(0, read));
+            downloaded += read;
+
+            if (total > 0)
+            {
+                ConsoleProgress.WriteBar(
+                    "Descargando IPA",
+                    downloaded,
+                    total,
+                    $"{FormatBytes(downloaded)} / {FormatBytes(total)}");
+            }
+            else
+            {
+                ConsoleProgress.WriteBar(
+                    "Descargando IPA",
+                    downloaded,
+                    downloaded + 1,
+                    FormatBytes(downloaded));
+            }
+        }
+
+        ConsoleProgress.WriteBar(
+            "Descargando IPA",
+            1,
+            1,
+            total > 0 ? FormatBytes(total) : FormatBytes(downloaded));
+        Console.WriteLine();
+    }
+
     private async Task<JsonDocument> GetJson(string url)
     {
         using var response = await _http.GetAsync(url);
@@ -231,6 +327,21 @@ sealed class GitHubActionsHelper : IDisposable
     private string Api(string path)
     {
         return $"https://api.github.com/repos/{_options.Owner}/{_options.Repo}/{path}";
+    }
+
+    private static string FormatBytes(long bytes)
+    {
+        string[] units = ["B", "KB", "MB", "GB"];
+        var value = (double)bytes;
+        var unit = 0;
+
+        while (value >= 1024 && unit < units.Length - 1)
+        {
+            value /= 1024;
+            unit++;
+        }
+
+        return $"{value:0.##} {units[unit]}";
     }
 
     public void Dispose() => _http.Dispose();
@@ -291,6 +402,32 @@ sealed class GitHubActionsHelper : IDisposable
     }
 }
 
+static class ConsoleProgress
+{
+    public static void WriteBar(string title, long current, long total, string label)
+    {
+        if (total <= 0)
+        {
+            total = 1;
+        }
+
+        current = Math.Clamp(current, 0, total);
+        const int width = 30;
+        var percent = (double)current / total;
+        var filled = (int)Math.Round(percent * width);
+        var bar = new string('#', filled) + new string('-', width - filled);
+        var text = $"\r{title}: [{bar}] {percent:P0}  {label}";
+
+        var consoleWidth = Console.IsOutputRedirected ? 120 : Math.Max(Console.WindowWidth - 1, 80);
+        if (text.Length < consoleWidth)
+        {
+            text = text.PadRight(consoleWidth);
+        }
+
+        Console.Write(text);
+    }
+}
+
 sealed record HelperOptions(
     string Owner,
     string Repo,
@@ -306,7 +443,7 @@ sealed record HelperOptions(
         var repo = "windyomi";
         var workflow = "build_ios_unsigned.yml";
         var branchRef = "main";
-        var output = "dist";
+        var output = DefaultOutputDirectory();
         long? downloadOnly = null;
 
         for (var i = 0; i < args.Length; i++)
@@ -381,9 +518,25 @@ Opciones:
   --ref main
   --out carpeta
   --download-only run_id
+
+Salida por defecto:
+  Escritorio\IPA Windyomi
 """);
     }
+
+    private static string DefaultOutputDirectory()
+    {
+        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+        if (string.IsNullOrWhiteSpace(desktop))
+        {
+            desktop = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        }
+
+        return Path.Combine(desktop, "IPA Windyomi");
+    }
 }
+
+sealed record GitHubRunProgress(int Completed, int Total, string Label);
 
 sealed record GitHubRun(
     long Id,

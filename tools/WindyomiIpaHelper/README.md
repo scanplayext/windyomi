@@ -40,4 +40,11 @@ Run:
 tools\WindyomiIpaHelper\bin\Release\net8.0\win-x64\publish\WindyomiIpaHelper.exe
 ```
 
-The IPA will be downloaded to `dist/` by default.
+The helper shows build and download progress bars. When the workflow finishes,
+the IPA is downloaded automatically.
+
+By default, the IPA will be saved to:
+
+```text
+%USERPROFILE%\Desktop\IPA Windyomi
+```
