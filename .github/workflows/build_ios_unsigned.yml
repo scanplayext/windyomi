@@ -43,20 +43,10 @@ jobs:
       - name: Cache CocoaPods
         uses: actions/cache@v4
         with:
-          path: |
-            ~/Library/Caches/CocoaPods
-            ios/Pods
+          path: ~/Library/Caches/CocoaPods
           key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-
-      - name: Cache Xcode DerivedData
-        uses: actions/cache@v4
-        with:
-          path: ~/Library/Developer/Xcode/DerivedData
-          key: ${{ runner.os }}-xcode-deriveddata-${{ hashFiles('pubspec.lock', 'ios/Podfile.lock', 'rust/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-xcode-deriveddata-
 
       - name: Cache Flutter Rust Bridge CLI
         uses: actions/cache@v4
@@ -91,6 +81,11 @@ jobs:
 
       - name: Fetch Flutter dependencies
         run: flutter pub get
+
+      - name: Clean stale iOS build artifacts
+        run: |
+          rm -rf ios/Pods
+          rm -rf ~/Library/Developer/Xcode/DerivedData/Runner-*
 
       - name: Build iOS app without signing
         run: flutter build ios --release --no-codesign --no-pub
