@@ -20,7 +20,15 @@ tools\WindyomiIpaHelper\bin\Release\net8.0\win-x64\publish\WindyomiIpaHelper.exe
 
 ## Use
 
-Create a GitHub token with Actions permissions and set it:
+Recommended: sign in once with GitHub CLI:
+
+```powershell
+gh auth login --web --git-protocol https --scopes repo,workflow
+```
+
+Then run the helper. It will reuse the secure GitHub CLI session automatically.
+
+Alternative: create a GitHub token with Actions permissions and set it:
 
 ```powershell
 $env:WINDYOMI_GITHUB_TOKEN = "YOUR_TOKEN"

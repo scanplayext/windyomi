@@ -1,4 +1,5 @@
 using System.IO.Compression;
+using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -50,6 +51,11 @@ sealed class GitHubActionsHelper : IDisposable
     {
         _options = options;
         var token = options.Token;
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            token = TryReadTokenFromGitHubCli();
+        }
+
         if (string.IsNullOrWhiteSpace(token))
         {
             Console.Write("GitHub token: ");
@@ -250,6 +256,38 @@ sealed class GitHubActionsHelper : IDisposable
         }
 
         return builder.ToString();
+    }
+
+    private static string? TryReadTokenFromGitHubCli()
+    {
+        try
+        {
+            using var process = new Process();
+            process.StartInfo = new ProcessStartInfo
+            {
+                FileName = "gh",
+                Arguments = "auth token",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            process.Start();
+            var token = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit(5000);
+
+            if (process.ExitCode == 0 && !string.IsNullOrWhiteSpace(token))
+            {
+                Console.WriteLine("Usando sesion existente de GitHub CLI.");
+                return token;
+            }
+        }
+        catch
+        {
+            // GitHub CLI is optional. Fall back to env vars or manual token input.
+        }
+
+        return null;
     }
 }
 
