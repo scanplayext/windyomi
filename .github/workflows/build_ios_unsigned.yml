@@ -137,7 +137,7 @@ jobs:
           mkdir -p build/ios/iphoneos
           if [ "$RUNNER_APP_PATH" != "build/ios/iphoneos/Runner.app" ]; then
             rm -rf build/ios/iphoneos/Runner.app
-            cp -R "$RUNNER_APP_PATH" build/ios/iphoneos/Runner.app
+            ditto "$RUNNER_APP_PATH" build/ios/iphoneos/Runner.app
           fi
 
           TARGET_APP="build/ios/iphoneos/Runner.app"
@@ -153,18 +153,6 @@ jobs:
             name="$(basename "$framework")"
             if [ ! -d "$TARGET_APP/Frameworks/$name" ]; then
               ditto "$framework" "$TARGET_APP/Frameworks/$name"
-              echo "Embedded $name"
-            fi
-          done
-
-          find build/ios "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Release-iphoneos/*.dylib" -type f -print 2>/dev/null | while IFS= read -r dylib; do
-            case "$dylib" in
-              *"/Runner.app/"*) continue ;;
-            esac
-
-            name="$(basename "$dylib")"
-            if [ ! -f "$TARGET_APP/Frameworks/$name" ]; then
-              ditto "$dylib" "$TARGET_APP/Frameworks/$name"
               echo "Embedded $name"
             fi
           done
@@ -186,7 +174,7 @@ jobs:
         run: |
           rm -rf build/ios/ipa_unsigned
           mkdir -p build/ios/ipa_unsigned/Payload
-          cp -R build/ios/iphoneos/Runner.app build/ios/ipa_unsigned/Payload/Runner.app
+          ditto build/ios/iphoneos/Runner.app build/ios/ipa_unsigned/Payload/Runner.app
           APP_PATH="build/ios/ipa_unsigned/Payload/Runner.app"
           find "$APP_PATH" -name "_CodeSignature" -type d -prune -exec rm -rf {} +
           find "$APP_PATH" -name "CodeResources" -type f -delete
