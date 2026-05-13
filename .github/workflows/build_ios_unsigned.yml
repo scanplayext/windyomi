@@ -96,9 +96,17 @@ jobs:
           set -e
 
           if [ "$BUILD_STATUS" -ne 0 ]; then
-            if [ -d build/ios/iphoneos/Runner.app ]; then
+            RUNNER_APP_PATH="$(find build/ios ios/build "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Runner.app" -type d -print -quit 2>/dev/null || true)"
+
+            if [ -n "$RUNNER_APP_PATH" ]; then
+              mkdir -p build/ios/iphoneos
+              if [ "$RUNNER_APP_PATH" != "build/ios/iphoneos/Runner.app" ]; then
+                rm -rf build/ios/iphoneos/Runner.app
+                cp -R "$RUNNER_APP_PATH" build/ios/iphoneos/Runner.app
+              fi
               echo "Flutter returned $BUILD_STATUS after producing Runner.app; continuing unsigned IPA packaging."
             else
+              find build/ios ios/build "$HOME/Library/Developer/Xcode/DerivedData" -name "*.app" -type d -print 2>/dev/null || true
               exit "$BUILD_STATUS"
             fi
           fi
