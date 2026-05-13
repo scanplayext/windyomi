@@ -170,16 +170,43 @@ jobs:
             echo "Flutter returned $BUILD_STATUS after producing Runner.app; continuing unsigned IPA packaging."
           fi
 
+      - name: Ad-hoc sign app bundle for sideloading
+        run: |
+          APP_PATH="build/ios/iphoneos/Runner.app"
+
+          find "$APP_PATH" -name "_CodeSignature" -type d -prune -exec rm -rf {} +
+          find "$APP_PATH" -name "CodeResources" -type f -delete
+          find "$APP_PATH" -name "*.xcent" -type f -delete
+          rm -f "$APP_PATH/embedded.mobileprovision"
+
+          if [ -d "$APP_PATH/Frameworks" ]; then
+            find "$APP_PATH/Frameworks" -maxdepth 1 -name "*.framework" -type d -print | sort | while IFS= read -r framework; do
+              echo "Ad-hoc signing $(basename "$framework")"
+              codesign --force --sign - --timestamp=none "$framework"
+            done
+
+            find "$APP_PATH/Frameworks" -maxdepth 1 \( -name "*.dylib" -o -name "*.so" \) -type f -print | sort | while IFS= read -r library; do
+              echo "Ad-hoc signing $(basename "$library")"
+              codesign --force --sign - --timestamp=none "$library"
+            done
+          fi
+
+          if [ -d "$APP_PATH/PlugIns" ]; then
+            find "$APP_PATH/PlugIns" -name "*.appex" -type d -print | sort | while IFS= read -r appex; do
+              echo "Ad-hoc signing $(basename "$appex")"
+              codesign --force --sign - --timestamp=none "$appex"
+            done
+          fi
+
+          echo "Ad-hoc signing Runner.app"
+          codesign --force --sign - --timestamp=none "$APP_PATH"
+          codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+
       - name: Package unsigned IPA
         run: |
           rm -rf build/ios/ipa_unsigned
           mkdir -p build/ios/ipa_unsigned/Payload
           ditto build/ios/iphoneos/Runner.app build/ios/ipa_unsigned/Payload/Runner.app
-          APP_PATH="build/ios/ipa_unsigned/Payload/Runner.app"
-          find "$APP_PATH" -name "_CodeSignature" -type d -prune -exec rm -rf {} +
-          find "$APP_PATH" -name "CodeResources" -type f -delete
-          find "$APP_PATH" -name "*.xcent" -type f -delete
-          rm -f "$APP_PATH/embedded.mobileprovision"
           cd build/ios/ipa_unsigned
           ditto -c -k --sequesterRsrc --keepParent Payload ../Windyomi-unsigned-ios.ipa
 
