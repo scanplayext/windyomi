@@ -414,6 +414,18 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         ),
       );
     }
+    if (dest.contains("/crunchyroll")) {
+      destinations[dest.indexOf(
+        "/crunchyroll",
+      )] = const NavigationRailDestination(
+        selectedIcon: Icon(Icons.play_circle_fill_rounded),
+        icon: Icon(Icons.play_circle_outline_rounded),
+        label: Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Text('Crunchyroll'),
+        ),
+      );
+    }
     if (dest.contains("/more")) {
       destinations[dest.indexOf("/more")] = NavigationRailDestination(
         selectedIcon: const Icon(Icons.more_horiz),
@@ -522,6 +534,13 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           ref: ref,
         ),
         label: l10n.browse,
+      );
+    }
+    if (dest.contains("/crunchyroll")) {
+      destinations[dest.indexOf("/crunchyroll")] = const NavigationDestination(
+        selectedIcon: Icon(Icons.play_circle_fill_rounded),
+        icon: Icon(Icons.play_circle_outline_rounded),
+        label: 'Crunchyroll',
       );
     }
     if (dest.contains("/more")) {
@@ -695,6 +714,7 @@ class _TabletLayout extends StatelessWidget {
       '/history',
       '/updates',
       '/browse',
+      '/crunchyroll',
       '/more',
       '/trackerLibrary',
     };
@@ -765,6 +785,7 @@ class _MobileBottomNavigation extends StatelessWidget {
       '/history',
       '/updates',
       '/browse',
+      '/crunchyroll',
       '/more',
       '/trackerLibrary',
     };

@@ -73,10 +73,10 @@ part 'router.g.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 @riverpod
 GoRouter router(Ref ref) {
-  final router = RouterNotifier();
-  final hiddenItems = ref.read(hideItemsStateProvider);
-  final initLocation = ref
-      .watch(navigationOrderStateProvider)
+  final navigationOrder = ref.watch(navigationOrderStateProvider);
+  final router = RouterNotifier(navigationOrder);
+  final hiddenItems = ref.watch(hideItemsStateProvider);
+  final initLocation = navigationOrder
       .where((e) => !hiddenItems.contains(e))
       .first;
 
@@ -129,6 +129,10 @@ class RouterCurrentLocationState extends _$RouterCurrentLocationState {
 }
 
 class RouterNotifier extends ChangeNotifier {
+  RouterNotifier(this.navigationOrder);
+
+  final List<String> navigationOrder;
+
   List<RouteBase> get _routes => [
     ShellRoute(
       builder: (context, state, child) => MainScreen(child: child),
@@ -137,25 +141,50 @@ class RouterNotifier extends ChangeNotifier {
           name: "MangaLibrary",
           builder: (id) =>
               LibraryScreen(itemType: ItemType.manga, presetInput: id),
+          directionalTransition: true,
         ),
         _genericRoute<String?>(
           name: "AnimeLibrary",
           builder: (id) =>
               LibraryScreen(itemType: ItemType.anime, presetInput: id),
+          directionalTransition: true,
         ),
         _genericRoute<String?>(
           name: "NovelLibrary",
           builder: (id) =>
               LibraryScreen(itemType: ItemType.novel, presetInput: id),
+          directionalTransition: true,
         ),
         _genericRoute<String?>(
           name: "trackerLibrary",
           builder: (id) => TrackerLibraryScreen(presetInput: id),
+          directionalTransition: true,
         ),
-        _genericRoute(name: "history", child: const HistoryScreen()),
-        _genericRoute(name: "updates", child: const UpdatesScreen()),
-        _genericRoute(name: "browse", child: const BrowseScreen()),
-        _genericRoute(name: "more", child: const MoreScreen()),
+        _genericRoute(
+          name: "history",
+          child: const HistoryScreen(),
+          directionalTransition: true,
+        ),
+        _genericRoute(
+          name: "updates",
+          child: const UpdatesScreen(),
+          directionalTransition: true,
+        ),
+        _genericRoute(
+          name: "browse",
+          child: const BrowseScreen(),
+          directionalTransition: true,
+        ),
+        _genericRoute(
+          name: "crunchyroll",
+          child: const CrunchyrollHomeScreen(),
+          directionalTransition: true,
+        ),
+        _genericRoute(
+          name: "more",
+          child: const MoreScreen(),
+          directionalTransition: true,
+        ),
       ],
     ),
     _genericRoute<(Source?, bool)>(
@@ -222,7 +251,6 @@ class RouterNotifier extends ChangeNotifier {
     ),
     _genericRoute(name: "downloads", child: const DownloadsScreen()),
     _genericRoute(name: "dataAndStorage", child: const DataAndStorage()),
-    _genericRoute(name: "crunchyroll", child: const CrunchyrollHomeScreen()),
     _genericRoute<CrunchyrollSeries>(
       name: "crunchyrollDetail",
       builder: (series) => CrunchyrollDetailScreen(series: series),
@@ -306,9 +334,11 @@ class RouterNotifier extends ChangeNotifier {
     String? path,
     Widget Function(T extra)? builder,
     Widget? child,
+    bool directionalTransition = false,
   }) {
+    final routePath = path ?? (name != null ? "/$name" : "/");
     return GoRoute(
-      path: path ?? (name != null ? "/$name" : "/"),
+      path: routePath,
       name: name,
       builder: (context, state) {
         if (builder != null) {
@@ -323,6 +353,14 @@ class RouterNotifier extends ChangeNotifier {
               final pageChild = builder != null
                   ? builder(state.extra as T)
                   : child!;
+              if (directionalTransition) {
+                return directionalTransitionPage(
+                  key: state.pageKey,
+                  child: pageChild,
+                  location: routePath,
+                  navigationOrder: navigationOrder,
+                );
+              }
               return transitionPage(key: state.pageKey, child: pageChild);
             }
           : null,
@@ -332,6 +370,51 @@ class RouterNotifier extends ChangeNotifier {
 
 Page transitionPage({required LocalKey key, required child}) {
   return CupertinoPage(key: key, child: child);
+}
+
+int? _lastDirectionalTransitionIndex;
+
+Page directionalTransitionPage({
+  required LocalKey key,
+  required Widget child,
+  required String location,
+  required List<String> navigationOrder,
+}) {
+  final currentIndex = navigationOrder.indexOf(location);
+  final previousIndex = _lastDirectionalTransitionIndex;
+  final beginX = previousIndex == null || currentIndex == previousIndex
+      ? 0.0
+      : currentIndex > previousIndex
+      ? 1.0
+      : -1.0;
+
+  if (currentIndex != -1) {
+    _lastDirectionalTransitionIndex = currentIndex;
+  }
+
+  return CustomTransitionPage(
+    key: key,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 260),
+    reverseTransitionDuration: const Duration(milliseconds: 220),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      if (beginX == 0) return child;
+
+      final curvedAnimation = CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeOutCubic,
+        reverseCurve: Curves.easeInCubic,
+      );
+
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: Offset(beginX, 0),
+          end: Offset.zero,
+        ).animate(curvedAnimation),
+        child: child,
+      );
+    },
+  );
 }
 
 Route createRoute({required Widget page}) {
