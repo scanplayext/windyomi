@@ -95,20 +95,91 @@ jobs:
           BUILD_STATUS=$?
           set -e
 
-          if [ "$BUILD_STATUS" -ne 0 ]; then
-            RUNNER_APP_PATH="$(find build/ios ios/build "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Runner.app" -type d -print -quit 2>/dev/null || true)"
-
-            if [ -n "$RUNNER_APP_PATH" ]; then
-              mkdir -p build/ios/iphoneos
-              if [ "$RUNNER_APP_PATH" != "build/ios/iphoneos/Runner.app" ]; then
-                rm -rf build/ios/iphoneos/Runner.app
-                cp -R "$RUNNER_APP_PATH" build/ios/iphoneos/Runner.app
+          print_runner_candidates() {
+            echo "Runner.app candidates:"
+            find build/ios ios/build "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Runner.app" -type d -print 2>/dev/null | while IFS= read -r app; do
+              echo "- $app"
+              if [ -d "$app/Frameworks" ]; then
+                find "$app/Frameworks" -maxdepth 1 -name "*.framework" -type d -print 2>/dev/null | sed 's#^.*/##' | sort | tr '\n' ' '
+                echo
+              else
+                echo "  no Frameworks directory"
               fi
-              echo "Flutter returned $BUILD_STATUS after producing Runner.app; continuing unsigned IPA packaging."
-            else
-              find build/ios ios/build "$HOME/Library/Developer/Xcode/DerivedData" -name "*.app" -type d -print 2>/dev/null || true
+            done
+          }
+
+          select_runner_app() {
+            find build/ios ios/build "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Runner.app" -type d -print 2>/dev/null | while IFS= read -r app; do
+              framework_count=0
+              if [ -d "$app/Frameworks" ]; then
+                framework_count="$(find "$app/Frameworks" -maxdepth 1 -name "*.framework" -type d -print 2>/dev/null | wc -l | tr -d ' ')"
+              fi
+
+              has_ass=0
+              if [ -f "$app/Frameworks/Ass.framework/Ass" ]; then
+                has_ass=1
+              fi
+
+              printf "%s\t%s\t%s\n" "$has_ass" "$framework_count" "$app"
+            done | sort -r -k1,1n -k2,2n | awk -F '\t' 'NR == 1 { print $3 }'
+          }
+
+          RUNNER_APP_PATH="$(select_runner_app || true)"
+
+          if [ -z "$RUNNER_APP_PATH" ]; then
+            print_runner_candidates
+            if [ "$BUILD_STATUS" -ne 0 ]; then
               exit "$BUILD_STATUS"
             fi
+            exit 1
+          fi
+
+          mkdir -p build/ios/iphoneos
+          if [ "$RUNNER_APP_PATH" != "build/ios/iphoneos/Runner.app" ]; then
+            rm -rf build/ios/iphoneos/Runner.app
+            cp -R "$RUNNER_APP_PATH" build/ios/iphoneos/Runner.app
+          fi
+
+          TARGET_APP="build/ios/iphoneos/Runner.app"
+          mkdir -p "$TARGET_APP/Frameworks"
+
+          echo "Using Runner.app from: $RUNNER_APP_PATH"
+          echo "Embedding Release-iphoneos CocoaPods frameworks into Runner.app..."
+          find build/ios "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Release-iphoneos/*.framework" -type d -print 2>/dev/null | while IFS= read -r framework; do
+            case "$framework" in
+              *"/Runner.app/"*) continue ;;
+            esac
+
+            name="$(basename "$framework")"
+            if [ ! -d "$TARGET_APP/Frameworks/$name" ]; then
+              ditto "$framework" "$TARGET_APP/Frameworks/$name"
+              echo "Embedded $name"
+            fi
+          done
+
+          find build/ios "$HOME/Library/Developer/Xcode/DerivedData" -path "*/Release-iphoneos/*.dylib" -type f -print 2>/dev/null | while IFS= read -r dylib; do
+            case "$dylib" in
+              *"/Runner.app/"*) continue ;;
+            esac
+
+            name="$(basename "$dylib")"
+            if [ ! -f "$TARGET_APP/Frameworks/$name" ]; then
+              ditto "$dylib" "$TARGET_APP/Frameworks/$name"
+              echo "Embedded $name"
+            fi
+          done
+
+          echo "Final embedded frameworks:"
+          find "$TARGET_APP/Frameworks" -maxdepth 1 -name "*.framework" -type d -print 2>/dev/null | sed 's#^.*/##' | sort
+
+          if [ ! -f "$TARGET_APP/Frameworks/Ass.framework/Ass" ]; then
+            echo "Ass.framework is missing from the unsigned app bundle."
+            print_runner_candidates
+            exit 1
+          fi
+
+          if [ "$BUILD_STATUS" -ne 0 ]; then
+            echo "Flutter returned $BUILD_STATUS after producing Runner.app; continuing unsigned IPA packaging."
           fi
 
       - name: Package unsigned IPA
