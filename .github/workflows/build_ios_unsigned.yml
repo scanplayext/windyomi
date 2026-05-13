@@ -100,8 +100,13 @@ jobs:
           rm -rf build/ios/ipa_unsigned
           mkdir -p build/ios/ipa_unsigned/Payload
           cp -R build/ios/iphoneos/Runner.app build/ios/ipa_unsigned/Payload/Runner.app
+          APP_PATH="build/ios/ipa_unsigned/Payload/Runner.app"
+          find "$APP_PATH" -name "_CodeSignature" -type d -prune -exec rm -rf {} +
+          find "$APP_PATH" -name "CodeResources" -type f -delete
+          find "$APP_PATH" -name "*.xcent" -type f -delete
+          rm -f "$APP_PATH/embedded.mobileprovision"
           cd build/ios/ipa_unsigned
-          zip -qry ../Windyomi-unsigned-ios.ipa Payload
+          ditto -c -k --sequesterRsrc --keepParent Payload ../Windyomi-unsigned-ios.ipa
 
       - name: Upload unsigned IPA
         uses: actions/upload-artifact@v4
