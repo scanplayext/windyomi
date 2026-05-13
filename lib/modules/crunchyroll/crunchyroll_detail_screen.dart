@@ -40,7 +40,7 @@ class CrunchyrollDetailScreen extends StatelessWidget {
               return _CrunchyrollEpisodeTile(
                 index: index + 1,
                 series: series,
-                onTap: () => _openPlayer(context),
+                onTap: () => _openPlayer(context, episodeNumber: index + 1),
               );
             },
           ),
@@ -181,7 +181,7 @@ class CrunchyrollDetailScreen extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           IconButton.filledTonal(
-            tooltip: 'Abrir reproductor oficial',
+            tooltip: 'Abrir en Crunchyroll',
             onPressed: () => _openPlayer(context),
             icon: const Icon(Icons.open_in_full),
           ),
@@ -234,10 +234,18 @@ class CrunchyrollDetailScreen extends StatelessWidget {
     );
   }
 
-  void _openPlayer(BuildContext context) {
+  void _openPlayer(BuildContext context, {int? episodeNumber}) {
     context.push(
       '/crunchyrollPlayer',
-      extra: {'url': series.watchUrl, 'title': series.title},
+      extra: {
+        'url': series.watchUrl,
+        'title': series.title,
+        'episodeTitle': episodeNumber == null
+            ? 'Crunchyroll'
+            : 'Episodio $episodeNumber',
+        'episodeNumber': episodeNumber,
+        'episodeCount': _episodeCount,
+      },
     );
   }
 }

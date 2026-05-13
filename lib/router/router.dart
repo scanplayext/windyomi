@@ -232,6 +232,9 @@ class RouterNotifier extends ChangeNotifier {
       builder: (data) => CrunchyrollPlayerScreen(
         initialUrl: data["url"]?.toString(),
         title: data["title"]?.toString(),
+        episodeTitle: data["episodeTitle"]?.toString(),
+        episodeNumber: data["episodeNumber"] as int?,
+        episodeCount: data["episodeCount"] as int?,
       ),
     ),
     _genericRoute(name: "stremioAddons", child: const StremioAddonsScreen()),
